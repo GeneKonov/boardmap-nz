@@ -1,0 +1,2150 @@
+{
+  "meta": {
+    "refreshed": "2026-05-24",
+    "companies": 30,
+    "directors": 181,
+    "edges": 203
+  },
+  "nodes": [
+    {
+      "id": "c01",
+      "type": "company",
+      "ticker": "FPH",
+      "name": "Fisher & Paykel Healthcare Corporation Limited",
+      "sector": "Healthcare",
+      "cap": 16.0
+    },
+    {
+      "id": "c02",
+      "type": "company",
+      "ticker": "ANZ",
+      "name": "ANZ Bank New Zealand Limited",
+      "sector": "Financials",
+      "cap": 14.0
+    },
+    {
+      "id": "c03",
+      "type": "company",
+      "ticker": "WBC",
+      "name": "Westpac New Zealand Limited",
+      "sector": "Financials",
+      "cap": 13.0
+    },
+    {
+      "id": "c04",
+      "type": "company",
+      "ticker": "CEN",
+      "name": "Contact Energy Limited",
+      "sector": "Energy",
+      "cap": 5.2
+    },
+    {
+      "id": "c05",
+      "type": "company",
+      "ticker": "MEL",
+      "name": "Meridian Energy Limited",
+      "sector": "Energy",
+      "cap": 9.8
+    },
+    {
+      "id": "c06",
+      "type": "company",
+      "ticker": "MCY",
+      "name": "Mercury NZ Limited",
+      "sector": "Energy",
+      "cap": 5.6
+    },
+    {
+      "id": "c07",
+      "type": "company",
+      "ticker": "GNE",
+      "name": "Genesis Energy Limited",
+      "sector": "Energy",
+      "cap": 2.1
+    },
+    {
+      "id": "c08",
+      "type": "company",
+      "ticker": "AIR",
+      "name": "Air New Zealand Limited",
+      "sector": "Industrials",
+      "cap": 1.8
+    },
+    {
+      "id": "c09",
+      "type": "company",
+      "ticker": "SPK",
+      "name": "Spark New Zealand Limited",
+      "sector": "Technology",
+      "cap": 4.3
+    },
+    {
+      "id": "c10",
+      "type": "company",
+      "ticker": "TPW",
+      "name": "Manawa Energy Limited",
+      "sector": "Utilities",
+      "cap": 1.5
+    },
+    {
+      "id": "c11",
+      "type": "company",
+      "ticker": "SUM",
+      "name": "Summerset Group Holdings Limited",
+      "sector": "Healthcare",
+      "cap": 2.4
+    },
+    {
+      "id": "c12",
+      "type": "company",
+      "ticker": "RYM",
+      "name": "Ryman Healthcare Limited",
+      "sector": "Healthcare",
+      "cap": 3.1
+    },
+    {
+      "id": "c13",
+      "type": "company",
+      "ticker": "PCT",
+      "name": "Precinct Properties New Zealand Limited",
+      "sector": "Real Estate",
+      "cap": 1.9
+    },
+    {
+      "id": "c14",
+      "type": "company",
+      "ticker": "KPG",
+      "name": "Kiwi Property Group Limited",
+      "sector": "Real Estate",
+      "cap": 1.7
+    },
+    {
+      "id": "c15",
+      "type": "company",
+      "ticker": "ARG",
+      "name": "Argosy Property Limited",
+      "sector": "Real Estate",
+      "cap": 1.2
+    },
+    {
+      "id": "c16",
+      "type": "company",
+      "ticker": "VCT",
+      "name": "Vector Limited",
+      "sector": "Utilities",
+      "cap": 3.2
+    },
+    {
+      "id": "c17",
+      "type": "company",
+      "ticker": "SKC",
+      "name": "SkyCity Entertainment Group Limited",
+      "sector": "Consumer",
+      "cap": 1.4
+    },
+    {
+      "id": "c18",
+      "type": "company",
+      "ticker": "SKT",
+      "name": "Sky Network Television Limited",
+      "sector": "Consumer",
+      "cap": 0.9
+    },
+    {
+      "id": "c19",
+      "type": "company",
+      "ticker": "IFT",
+      "name": "Infratil Limited",
+      "sector": "Infrastructure",
+      "cap": 6.8
+    },
+    {
+      "id": "c20",
+      "type": "company",
+      "ticker": "ATM",
+      "name": "The a2 Milk Company Limited",
+      "sector": "Consumer",
+      "cap": 4.1
+    },
+    {
+      "id": "c21",
+      "type": "company",
+      "ticker": "FCG",
+      "name": "Fonterra Co-operative Group Limited",
+      "sector": "Consumer",
+      "cap": 3.8
+    },
+    {
+      "id": "c22",
+      "type": "company",
+      "ticker": "NZR",
+      "name": "Channel Infrastructure NZ Limited",
+      "sector": "Materials",
+      "cap": 0.7
+    },
+    {
+      "id": "c23",
+      "type": "company",
+      "ticker": "PFI",
+      "name": "Property for Industry Limited",
+      "sector": "Real Estate",
+      "cap": 1.1
+    },
+    {
+      "id": "c24",
+      "type": "company",
+      "ticker": "HLG",
+      "name": "Hallenstein Glasson Holdings Limited",
+      "sector": "Consumer",
+      "cap": 0.5
+    },
+    {
+      "id": "c25",
+      "type": "company",
+      "ticker": "MHJ",
+      "name": "Michael Hill International Limited",
+      "sector": "Consumer",
+      "cap": 0.6
+    },
+    {
+      "id": "c26",
+      "type": "company",
+      "ticker": "SCL",
+      "name": "Scales Corporation Limited",
+      "sector": "Consumer",
+      "cap": 0.8
+    },
+    {
+      "id": "c27",
+      "type": "company",
+      "ticker": "THL",
+      "name": "Tourism Holdings Limited",
+      "sector": "Consumer",
+      "cap": 0.9
+    },
+    {
+      "id": "c28",
+      "type": "company",
+      "ticker": "NHF",
+      "name": "nib nz limited",
+      "sector": "Financials",
+      "cap": 0.7
+    },
+    {
+      "id": "c29",
+      "type": "company",
+      "ticker": "AIA",
+      "name": "Auckland International Airport Limited",
+      "sector": "Infrastructure",
+      "cap": 8.1
+    },
+    {
+      "id": "c30",
+      "type": "company",
+      "ticker": "MFT",
+      "name": "Mainfreight Limited",
+      "sector": "Industrials",
+      "cap": 5.5
+    },
+    {
+      "id": "d001",
+      "type": "director",
+      "name": "Adrian Henry LITTLEWOOD",
+      "boardCount": 1
+    },
+    {
+      "id": "d002",
+      "type": "director",
+      "name": "Alastair Peter BELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d003",
+      "type": "director",
+      "name": "Alexandra Jane CUTLER",
+      "boardCount": 1
+    },
+    {
+      "id": "d004",
+      "type": "director",
+      "name": "Alison Jane BARRASS",
+      "boardCount": 1
+    },
+    {
+      "id": "d005",
+      "type": "director",
+      "name": "Alison Jane WATTERS",
+      "boardCount": 1
+    },
+    {
+      "id": "d006",
+      "type": "director",
+      "name": "Alison Rosemary GERRY",
+      "boardCount": 2
+    },
+    {
+      "id": "d007",
+      "type": "director",
+      "name": "Alistair FIELD",
+      "boardCount": 1
+    },
+    {
+      "id": "d008",
+      "type": "director",
+      "name": "Andrew HOLMES",
+      "boardCount": 1
+    },
+    {
+      "id": "d009",
+      "type": "director",
+      "name": "Andrew James BORLAND",
+      "boardCount": 1
+    },
+    {
+      "id": "d010",
+      "type": "director",
+      "name": "Andrew John CLARK",
+      "boardCount": 1
+    },
+    {
+      "id": "d011",
+      "type": "director",
+      "name": "Andrew Keith LOWE",
+      "boardCount": 1
+    },
+    {
+      "id": "d012",
+      "type": "director",
+      "name": "Andrew Mark CROSS",
+      "boardCount": 1
+    },
+    {
+      "id": "d013",
+      "type": "director",
+      "name": "Andrew Terence BREWER",
+      "boardCount": 1
+    },
+    {
+      "id": "d014",
+      "type": "director",
+      "name": "Andrew WONG",
+      "boardCount": 1
+    },
+    {
+      "id": "d015",
+      "type": "director",
+      "name": "Angela Jennifer BULL",
+      "boardCount": 2
+    },
+    {
+      "id": "d016",
+      "type": "director",
+      "name": "Anna Marion MOLLOY",
+      "boardCount": 1
+    },
+    {
+      "id": "d017",
+      "type": "director",
+      "name": "Anna Valerie CURZON",
+      "boardCount": 1
+    },
+    {
+      "id": "d018",
+      "type": "director",
+      "name": "Anne Joan LOVERIDGE",
+      "boardCount": 1
+    },
+    {
+      "id": "d019",
+      "type": "director",
+      "name": "Anne June URLWIN",
+      "boardCount": 3
+    },
+    {
+      "id": "d020",
+      "type": "director",
+      "name": "Annie STEEL",
+      "boardCount": 1
+    },
+    {
+      "id": "d021",
+      "type": "director",
+      "name": "Anthony David BATTERTON",
+      "boardCount": 1
+    },
+    {
+      "id": "d022",
+      "type": "director",
+      "name": "Antonia Margaret WATSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d023",
+      "type": "director",
+      "name": "Antonio Iii RIVERA",
+      "boardCount": 1
+    },
+    {
+      "id": "d024",
+      "type": "director",
+      "name": "Barbara Joan CHAPMAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d025",
+      "type": "director",
+      "name": "Belinda Leigh ROWE",
+      "boardCount": 1
+    },
+    {
+      "id": "d026",
+      "type": "director",
+      "name": "Brent John GOLDSACK",
+      "boardCount": 1
+    },
+    {
+      "id": "d027",
+      "type": "director",
+      "name": "Bruce George PLESTED",
+      "boardCount": 1
+    },
+    {
+      "id": "d028",
+      "type": "director",
+      "name": "Bruce Michael TURNER",
+      "boardCount": 1
+    },
+    {
+      "id": "d029",
+      "type": "director",
+      "name": "Bruce Ronald HASSALL",
+      "boardCount": 1
+    },
+    {
+      "id": "d030",
+      "type": "director",
+      "name": "Bryan William MOGRIDGE",
+      "boardCount": 1
+    },
+    {
+      "id": "d031",
+      "type": "director",
+      "name": "Carlie EVE",
+      "boardCount": 1
+    },
+    {
+      "id": "d032",
+      "type": "director",
+      "name": "Carolyn Mary STEELE",
+      "boardCount": 2
+    },
+    {
+      "id": "d033",
+      "type": "director",
+      "name": "Catherine Agnes QUINN",
+      "boardCount": 2
+    },
+    {
+      "id": "d034",
+      "type": "director",
+      "name": "Catherine Anne MCGRATH",
+      "boardCount": 1
+    },
+    {
+      "id": "d035",
+      "type": "director",
+      "name": "Catherine Louise PARSONS",
+      "boardCount": 1
+    },
+    {
+      "id": "d036",
+      "type": "director",
+      "name": "Catherine Margaret DRAYTON",
+      "boardCount": 1
+    },
+    {
+      "id": "d037",
+      "type": "director",
+      "name": "Chadwick William Cable BARTON",
+      "boardCount": 1
+    },
+    {
+      "id": "d038",
+      "type": "director",
+      "name": "Charles Paul Telford HUTCHISON",
+      "boardCount": 1
+    },
+    {
+      "id": "d039",
+      "type": "director",
+      "name": "Chris Stanley MEADS",
+      "boardCount": 1
+    },
+    {
+      "id": "d040",
+      "type": "director",
+      "name": "Christopher AIKEN",
+      "boardCount": 1
+    },
+    {
+      "id": "d041",
+      "type": "director",
+      "name": "Christopher James JUDD",
+      "boardCount": 1
+    },
+    {
+      "id": "d042",
+      "type": "director",
+      "name": "Claudia Isobel BATTEN",
+      "boardCount": 2
+    },
+    {
+      "id": "d043",
+      "type": "director",
+      "name": "Craig Lionel SIMS",
+      "boardCount": 1
+    },
+    {
+      "id": "d044",
+      "type": "director",
+      "name": "David Andrew BALDWIN",
+      "boardCount": 1
+    },
+    {
+      "id": "d045",
+      "type": "director",
+      "name": "David Edward James GIBSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d046",
+      "type": "director",
+      "name": "David Grant DEVONPORT",
+      "boardCount": 1
+    },
+    {
+      "id": "d047",
+      "type": "director",
+      "name": "David James Douglas THOMSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d048",
+      "type": "director",
+      "name": "David John GREEN",
+      "boardCount": 1
+    },
+    {
+      "id": "d049",
+      "type": "director",
+      "name": "David Landt BORTOLUSSI",
+      "boardCount": 1
+    },
+    {
+      "id": "d050",
+      "type": "director",
+      "name": "David Leslie PITMAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d051",
+      "type": "director",
+      "name": "David Powell CARTER",
+      "boardCount": 1
+    },
+    {
+      "id": "d052",
+      "type": "director",
+      "name": "David Robert Henry ATTENBOROUGH",
+      "boardCount": 1
+    },
+    {
+      "id": "d053",
+      "type": "director",
+      "name": "David SMOL",
+      "boardCount": 1
+    },
+    {
+      "id": "d054",
+      "type": "director",
+      "name": "David Thomas HAVERCROFT",
+      "boardCount": 2
+    },
+    {
+      "id": "d055",
+      "type": "director",
+      "name": "Dean John BRACEWELL",
+      "boardCount": 2
+    },
+    {
+      "id": "d056",
+      "type": "director",
+      "name": "Dean Ross HAMILTON",
+      "boardCount": 2
+    },
+    {
+      "id": "d057",
+      "type": "director",
+      "name": "Debra Ruth BIRCH",
+      "boardCount": 1
+    },
+    {
+      "id": "d058",
+      "type": "director",
+      "name": "Deion Mark CAMPBELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d059",
+      "type": "director",
+      "name": "Donald Robert BRAID",
+      "boardCount": 1
+    },
+    {
+      "id": "d060",
+      "type": "director",
+      "name": "Donna COOPER",
+      "boardCount": 1
+    },
+    {
+      "id": "d061",
+      "type": "director",
+      "name": "Douglas Alexander MCKAY",
+      "boardCount": 1
+    },
+    {
+      "id": "d062",
+      "type": "director",
+      "name": "Edward Douglas CLOSE",
+      "boardCount": 1
+    },
+    {
+      "id": "d063",
+      "type": "director",
+      "name": "Elizabeth SAVAGE",
+      "boardCount": 1
+    },
+    {
+      "id": "d064",
+      "type": "director",
+      "name": "Elodie Gaelle Johanna GUILLAUMOND",
+      "boardCount": 1
+    },
+    {
+      "id": "d065",
+      "type": "director",
+      "name": "Emma Jane HILL",
+      "boardCount": 1
+    },
+    {
+      "id": "d066",
+      "type": "director",
+      "name": "Felicity Jane Curran UNDERHILL",
+      "boardCount": 1
+    },
+    {
+      "id": "d067",
+      "type": "director",
+      "name": "Fiona Ann OLIVER",
+      "boardCount": 1
+    },
+    {
+      "id": "d068",
+      "type": "director",
+      "name": "Glenn Stuart DAVIS",
+      "boardCount": 1
+    },
+    {
+      "id": "d069",
+      "type": "director",
+      "name": "Graeme Andrew BLAIR",
+      "boardCount": 1
+    },
+    {
+      "id": "d070",
+      "type": "director",
+      "name": "Graeme James POPPLEWELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d071",
+      "type": "director",
+      "name": "Graham Andrew MCLEAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d072",
+      "type": "director",
+      "name": "Graham John COCKROFT",
+      "boardCount": 1
+    },
+    {
+      "id": "d073",
+      "type": "director",
+      "name": "Grainne Patricia TROUTE",
+      "boardCount": 2
+    },
+    {
+      "id": "d074",
+      "type": "director",
+      "name": "Grant Andrew DEMPSEY",
+      "boardCount": 1
+    },
+    {
+      "id": "d075",
+      "type": "director",
+      "name": "Grant Gareth WEBSTER",
+      "boardCount": 1
+    },
+    {
+      "id": "d076",
+      "type": "director",
+      "name": "Hamish John RUMBOLD",
+      "boardCount": 1
+    },
+    {
+      "id": "d077",
+      "type": "director",
+      "name": "Hannah Juliet HAMLING",
+      "boardCount": 1
+    },
+    {
+      "id": "d078",
+      "type": "director",
+      "name": "Hayley BUCKLEY",
+      "boardCount": 1
+    },
+    {
+      "id": "d079",
+      "type": "director",
+      "name": "Hinerangi RAUMATI",
+      "boardCount": 1
+    },
+    {
+      "id": "d080",
+      "type": "director",
+      "name": "Holly Suzanna KRAMER",
+      "boardCount": 1
+    },
+    {
+      "id": "d081",
+      "type": "director",
+      "name": "Ian Samuel KNOWLES",
+      "boardCount": 1
+    },
+    {
+      "id": "d082",
+      "type": "director",
+      "name": "James Bruce MILLER",
+      "boardCount": 2
+    },
+    {
+      "id": "d083",
+      "type": "director",
+      "name": "James Charles GLASSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d084",
+      "type": "director",
+      "name": "James MOULDER",
+      "boardCount": 1
+    },
+    {
+      "id": "d085",
+      "type": "director",
+      "name": "Jan BIBBY",
+      "boardCount": 1
+    },
+    {
+      "id": "d086",
+      "type": "director",
+      "name": "Jason Peter BOYES",
+      "boardCount": 1
+    },
+    {
+      "id": "d087",
+      "type": "director",
+      "name": "Jeffrey Robert MORRISON",
+      "boardCount": 1
+    },
+    {
+      "id": "d088",
+      "type": "director",
+      "name": "Jeremy Andrew SIMPSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d089",
+      "type": "director",
+      "name": "Joan WITHERS",
+      "boardCount": 2
+    },
+    {
+      "id": "d090",
+      "type": "director",
+      "name": "Joanne Maree APPLEYARD",
+      "boardCount": 1
+    },
+    {
+      "id": "d091",
+      "type": "director",
+      "name": "John Paul CLARK",
+      "boardCount": 1
+    },
+    {
+      "id": "d092",
+      "type": "director",
+      "name": "John Richard NICHOLLS",
+      "boardCount": 1
+    },
+    {
+      "id": "d093",
+      "type": "director",
+      "name": "Jolie HODSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d094",
+      "type": "director",
+      "name": "Jonathan Keith MACDONALD",
+      "boardCount": 1
+    },
+    {
+      "id": "d095",
+      "type": "director",
+      "name": "Jonathan Ryan WAECKER",
+      "boardCount": 1
+    },
+    {
+      "id": "d096",
+      "type": "director",
+      "name": "Josephine GAGAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d097",
+      "type": "director",
+      "name": "Julia Cecile HOARE",
+      "boardCount": 1
+    },
+    {
+      "id": "d098",
+      "type": "director",
+      "name": "Julia HOARE",
+      "boardCount": 1
+    },
+    {
+      "id": "d099",
+      "type": "director",
+      "name": "Julian Bradwell COOK",
+      "boardCount": 1
+    },
+    {
+      "id": "d100",
+      "type": "director",
+      "name": "Justine Bronwyn Gay SMYTH",
+      "boardCount": 1
+    },
+    {
+      "id": "d101",
+      "type": "director",
+      "name": "Karen Jane BYCROFT",
+      "boardCount": 1
+    },
+    {
+      "id": "d102",
+      "type": "director",
+      "name": "Katherine HUGHES",
+      "boardCount": 1
+    },
+    {
+      "id": "d103",
+      "type": "director",
+      "name": "Kathryn MITCHELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d104",
+      "type": "director",
+      "name": "Kathryn Marian MUNNINGS",
+      "boardCount": 1
+    },
+    {
+      "id": "d105",
+      "type": "director",
+      "name": "Keith Raymond SMITH",
+      "boardCount": 1
+    },
+    {
+      "id": "d106",
+      "type": "director",
+      "name": "Kevin KENRICK",
+      "boardCount": 1
+    },
+    {
+      "id": "d107",
+      "type": "director",
+      "name": "Kirsty MACTAGGART",
+      "boardCount": 1
+    },
+    {
+      "id": "d108",
+      "type": "director",
+      "name": "Lain JAGER",
+      "boardCount": 1
+    },
+    {
+      "id": "d109",
+      "type": "director",
+      "name": "Larry Dean DE SHON",
+      "boardCount": 1
+    },
+    {
+      "id": "d110",
+      "type": "director",
+      "name": "Laurissa Madge COONEY",
+      "boardCount": 1
+    },
+    {
+      "id": "d111",
+      "type": "director",
+      "name": "Lewis George GRADON",
+      "boardCount": 1
+    },
+    {
+      "id": "d112",
+      "type": "director",
+      "name": "Lindsay Megan WRIGHT",
+      "boardCount": 1
+    },
+    {
+      "id": "d113",
+      "type": "director",
+      "name": "Lisa Ann NELSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d114",
+      "type": "director",
+      "name": "Lisa Margaret MCINTYRE",
+      "boardCount": 1
+    },
+    {
+      "id": "d115",
+      "type": "director",
+      "name": "Malcolm James FORD",
+      "boardCount": 1
+    },
+    {
+      "id": "d116",
+      "type": "director",
+      "name": "Marie Magdaleen BISMARK",
+      "boardCount": 1
+    },
+    {
+      "id": "d117",
+      "type": "director",
+      "name": "Mark Cooper CAIRNS",
+      "boardCount": 1
+    },
+    {
+      "id": "d118",
+      "type": "director",
+      "name": "Mark Dalton AUE",
+      "boardCount": 1
+    },
+    {
+      "id": "d119",
+      "type": "director",
+      "name": "Mark David WHELAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d120",
+      "type": "director",
+      "name": "Mark Hilton BUCKMAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d121",
+      "type": "director",
+      "name": "Mark James BINNS",
+      "boardCount": 2
+    },
+    {
+      "id": "d122",
+      "type": "director",
+      "name": "Mark John VERBIEST",
+      "boardCount": 2
+    },
+    {
+      "id": "d123",
+      "type": "director",
+      "name": "Mark TUME",
+      "boardCount": 2
+    },
+    {
+      "id": "d124",
+      "type": "director",
+      "name": "Martin William STEARNE",
+      "boardCount": 1
+    },
+    {
+      "id": "d125",
+      "type": "director",
+      "name": "Matthew James FORBES",
+      "boardCount": 1
+    },
+    {
+      "id": "d126",
+      "type": "director",
+      "name": "Michael Carl PETERSEN",
+      "boardCount": 1
+    },
+    {
+      "id": "d127",
+      "type": "director",
+      "name": "Michael Grenfell DANIELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d128",
+      "type": "director",
+      "name": "Michael William DARCEY",
+      "boardCount": 1
+    },
+    {
+      "id": "d129",
+      "type": "director",
+      "name": "Michele June EMBLING",
+      "boardCount": 1
+    },
+    {
+      "id": "d130",
+      "type": "director",
+      "name": "Michelle Louise PYE",
+      "boardCount": 1
+    },
+    {
+      "id": "d131",
+      "type": "director",
+      "name": "Miranda BURDON",
+      "boardCount": 1
+    },
+    {
+      "id": "d132",
+      "type": "director",
+      "name": "Miriam Cather SIMPSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d133",
+      "type": "director",
+      "name": "Murray Peter JORDAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d134",
+      "type": "director",
+      "name": "Nagaja Tharanginee SANATKUMAR",
+      "boardCount": 2
+    },
+    {
+      "id": "d135",
+      "type": "director",
+      "name": "Nathan Laurence GOONAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d136",
+      "type": "director",
+      "name": "Neal Anthony BARCLAY",
+      "boardCount": 1
+    },
+    {
+      "id": "d137",
+      "type": "director",
+      "name": "Neville John MITCHELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d138",
+      "type": "director",
+      "name": "Nicholas John HARRIS",
+      "boardCount": 1
+    },
+    {
+      "id": "d139",
+      "type": "director",
+      "name": "Nicola Jean GREER",
+      "boardCount": 1
+    },
+    {
+      "id": "d140",
+      "type": "director",
+      "name": "Paul GOUGH",
+      "boardCount": 1
+    },
+    {
+      "id": "d141",
+      "type": "director",
+      "name": "Paul Jason MUNRO",
+      "boardCount": 1
+    },
+    {
+      "id": "d142",
+      "type": "director",
+      "name": "Paula Natalie JEFFS",
+      "boardCount": 1
+    },
+    {
+      "id": "d143",
+      "type": "director",
+      "name": "Paula Rae REBSTOCK",
+      "boardCount": 1
+    },
+    {
+      "id": "d144",
+      "type": "director",
+      "name": "Pei-yu YU",
+      "boardCount": 1
+    },
+    {
+      "id": "d145",
+      "type": "director",
+      "name": "Peter ALEXANDER",
+      "boardCount": 1
+    },
+    {
+      "id": "d146",
+      "type": "director",
+      "name": "Peter James MCBRIDE",
+      "boardCount": 1
+    },
+    {
+      "id": "d147",
+      "type": "director",
+      "name": "Peter Martin SPRINGFORD",
+      "boardCount": 1
+    },
+    {
+      "id": "d148",
+      "type": "director",
+      "name": "Peter Ross STEENSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d149",
+      "type": "director",
+      "name": "Philip BOWMAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d150",
+      "type": "director",
+      "name": "Philippa Mary GREENWOOD",
+      "boardCount": 2
+    },
+    {
+      "id": "d151",
+      "type": "director",
+      "name": "Rachel Beulah WINDER",
+      "boardCount": 1
+    },
+    {
+      "id": "d152",
+      "type": "director",
+      "name": "Rachel Emere TAULELEI",
+      "boardCount": 1
+    },
+    {
+      "id": "d153",
+      "type": "director",
+      "name": "Robert Anthony BAKER",
+      "boardCount": 1
+    },
+    {
+      "id": "d154",
+      "type": "director",
+      "name": "Robert David HAMILTON",
+      "boardCount": 3
+    },
+    {
+      "id": "d155",
+      "type": "director",
+      "name": "Robert Ian FYFE",
+      "boardCount": 1
+    },
+    {
+      "id": "d156",
+      "type": "director",
+      "name": "Robert Stuart MCDONALD",
+      "boardCount": 1
+    },
+    {
+      "id": "d157",
+      "type": "director",
+      "name": "Rukumoana SCHAAFHAUSEN",
+      "boardCount": 1
+    },
+    {
+      "id": "d158",
+      "type": "director",
+      "name": "Sandra Maree BROAD",
+      "boardCount": 1
+    },
+    {
+      "id": "d159",
+      "type": "director",
+      "name": "Sandra Mary VINCENT",
+      "boardCount": 1
+    },
+    {
+      "id": "d160",
+      "type": "director",
+      "name": "Scott Andrew ST JOHN",
+      "boardCount": 2
+    },
+    {
+      "id": "d161",
+      "type": "director",
+      "name": "Scott Robert PRITCHARD",
+      "boardCount": 1
+    },
+    {
+      "id": "d162",
+      "type": "director",
+      "name": "Sean Patrick DONOHUE",
+      "boardCount": 1
+    },
+    {
+      "id": "d163",
+      "type": "director",
+      "name": "Simon Roger COTTER",
+      "boardCount": 1
+    },
+    {
+      "id": "d164",
+      "type": "director",
+      "name": "Simon SHAKESHEFF",
+      "boardCount": 1
+    },
+    {
+      "id": "d165",
+      "type": "director",
+      "name": "Skye Lisa-beth DANIELS",
+      "boardCount": 1
+    },
+    {
+      "id": "d166",
+      "type": "director",
+      "name": "Sophia Adele MITCHELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d167",
+      "type": "director",
+      "name": "Sophie HASLEM",
+      "boardCount": 1
+    },
+    {
+      "id": "d168",
+      "type": "director",
+      "name": "Stephen John BULL",
+      "boardCount": 1
+    },
+    {
+      "id": "d169",
+      "type": "director",
+      "name": "Stuart James MCLAUCHLAN",
+      "boardCount": 1
+    },
+    {
+      "id": "d170",
+      "type": "director",
+      "name": "Susan Ruth PETERSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d171",
+      "type": "director",
+      "name": "Tania Joy Te Rangingangana SIMPSON",
+      "boardCount": 2
+    },
+    {
+      "id": "d172",
+      "type": "director",
+      "name": "Tarek ABOU KHATER ROBBIATI",
+      "boardCount": 1
+    },
+    {
+      "id": "d173",
+      "type": "director",
+      "name": "Therese Maria WALSH",
+      "boardCount": 1
+    },
+    {
+      "id": "d174",
+      "type": "director",
+      "name": "Timothy Charles GLASSON",
+      "boardCount": 1
+    },
+    {
+      "id": "d175",
+      "type": "director",
+      "name": "Timothy Marshall MILES",
+      "boardCount": 1
+    },
+    {
+      "id": "d176",
+      "type": "director",
+      "name": "Vaughan BUSBY",
+      "boardCount": 1
+    },
+    {
+      "id": "d177",
+      "type": "director",
+      "name": "Venasio CRAWLEY",
+      "boardCount": 1
+    },
+    {
+      "id": "d178",
+      "type": "director",
+      "name": "Vincent James HAWKSWORTH",
+      "boardCount": 1
+    },
+    {
+      "id": "d179",
+      "type": "director",
+      "name": "Warren James BELL",
+      "boardCount": 1
+    },
+    {
+      "id": "d180",
+      "type": "director",
+      "name": "Warwick David BRAY",
+      "boardCount": 1
+    },
+    {
+      "id": "d181",
+      "type": "director",
+      "name": "Warwick Ean HUNT",
+      "boardCount": 1
+    }
+  ],
+  "links": [
+    {
+      "source": "d137",
+      "target": "c01"
+    },
+    {
+      "source": "d127",
+      "target": "c01"
+    },
+    {
+      "source": "d012",
+      "target": "c01"
+    },
+    {
+      "source": "d114",
+      "target": "c01"
+    },
+    {
+      "source": "d017",
+      "target": "c01"
+    },
+    {
+      "source": "d111",
+      "target": "c01"
+    },
+    {
+      "source": "d071",
+      "target": "c01"
+    },
+    {
+      "source": "d132",
+      "target": "c01"
+    },
+    {
+      "source": "d160",
+      "target": "c02"
+    },
+    {
+      "source": "d119",
+      "target": "c02"
+    },
+    {
+      "source": "d089",
+      "target": "c02"
+    },
+    {
+      "source": "d043",
+      "target": "c02"
+    },
+    {
+      "source": "d134",
+      "target": "c02"
+    },
+    {
+      "source": "d032",
+      "target": "c02"
+    },
+    {
+      "source": "d022",
+      "target": "c02"
+    },
+    {
+      "source": "d123",
+      "target": "c02"
+    },
+    {
+      "source": "d054",
+      "target": "c03"
+    },
+    {
+      "source": "d135",
+      "target": "c03"
+    },
+    {
+      "source": "d154",
+      "target": "c03"
+    },
+    {
+      "source": "d057",
+      "target": "c03"
+    },
+    {
+      "source": "d150",
+      "target": "c03"
+    },
+    {
+      "source": "d034",
+      "target": "c03"
+    },
+    {
+      "source": "d048",
+      "target": "c03"
+    },
+    {
+      "source": "d081",
+      "target": "c03"
+    },
+    {
+      "source": "d156",
+      "target": "c04"
+    },
+    {
+      "source": "d053",
+      "target": "c04"
+    },
+    {
+      "source": "d158",
+      "target": "c04"
+    },
+    {
+      "source": "d058",
+      "target": "c04"
+    },
+    {
+      "source": "d157",
+      "target": "c04"
+    },
+    {
+      "source": "d045",
+      "target": "c04"
+    },
+    {
+      "source": "d094",
+      "target": "c04"
+    },
+    {
+      "source": "d097",
+      "target": "c05"
+    },
+    {
+      "source": "d072",
+      "target": "c05"
+    },
+    {
+      "source": "d122",
+      "target": "c05"
+    },
+    {
+      "source": "d171",
+      "target": "c05"
+    },
+    {
+      "source": "d134",
+      "target": "c05"
+    },
+    {
+      "source": "d051",
+      "target": "c05"
+    },
+    {
+      "source": "d001",
+      "target": "c06"
+    },
+    {
+      "source": "d160",
+      "target": "c06"
+    },
+    {
+      "source": "d121",
+      "target": "c06"
+    },
+    {
+      "source": "d154",
+      "target": "c06"
+    },
+    {
+      "source": "d077",
+      "target": "c06"
+    },
+    {
+      "source": "d170",
+      "target": "c06"
+    },
+    {
+      "source": "d152",
+      "target": "c06"
+    },
+    {
+      "source": "d036",
+      "target": "c07"
+    },
+    {
+      "source": "d079",
+      "target": "c07"
+    },
+    {
+      "source": "d175",
+      "target": "c07"
+    },
+    {
+      "source": "d024",
+      "target": "c07"
+    },
+    {
+      "source": "d084",
+      "target": "c07"
+    },
+    {
+      "source": "d044",
+      "target": "c07"
+    },
+    {
+      "source": "d181",
+      "target": "c07"
+    },
+    {
+      "source": "d055",
+      "target": "c08"
+    },
+    {
+      "source": "d173",
+      "target": "c08"
+    },
+    {
+      "source": "d042",
+      "target": "c08"
+    },
+    {
+      "source": "d110",
+      "target": "c08"
+    },
+    {
+      "source": "d006",
+      "target": "c08"
+    },
+    {
+      "source": "d136",
+      "target": "c08"
+    },
+    {
+      "source": "d109",
+      "target": "c08"
+    },
+    {
+      "source": "d113",
+      "target": "c09"
+    },
+    {
+      "source": "d178",
+      "target": "c09"
+    },
+    {
+      "source": "d054",
+      "target": "c09"
+    },
+    {
+      "source": "d093",
+      "target": "c09"
+    },
+    {
+      "source": "d172",
+      "target": "c09"
+    },
+    {
+      "source": "d100",
+      "target": "c09"
+    },
+    {
+      "source": "d112",
+      "target": "c09"
+    },
+    {
+      "source": "d180",
+      "target": "c09"
+    },
+    {
+      "source": "d125",
+      "target": "c10"
+    },
+    {
+      "source": "d085",
+      "target": "c10"
+    },
+    {
+      "source": "d091",
+      "target": "c10"
+    },
+    {
+      "source": "d073",
+      "target": "c11"
+    },
+    {
+      "source": "d067",
+      "target": "c11"
+    },
+    {
+      "source": "d168",
+      "target": "c11"
+    },
+    {
+      "source": "d014",
+      "target": "c11"
+    },
+    {
+      "source": "d122",
+      "target": "c11"
+    },
+    {
+      "source": "d116",
+      "target": "c11"
+    },
+    {
+      "source": "d177",
+      "target": "c11"
+    },
+    {
+      "source": "d082",
+      "target": "c12"
+    },
+    {
+      "source": "d104",
+      "target": "c12"
+    },
+    {
+      "source": "d056",
+      "target": "c12"
+    },
+    {
+      "source": "d050",
+      "target": "c12"
+    },
+    {
+      "source": "d076",
+      "target": "c12"
+    },
+    {
+      "source": "d161",
+      "target": "c12"
+    },
+    {
+      "source": "d142",
+      "target": "c12"
+    },
+    {
+      "source": "d041",
+      "target": "c13"
+    },
+    {
+      "source": "d039",
+      "target": "c13"
+    },
+    {
+      "source": "d019",
+      "target": "c13"
+    },
+    {
+      "source": "d139",
+      "target": "c13"
+    },
+    {
+      "source": "d123",
+      "target": "c13"
+    },
+    {
+      "source": "d004",
+      "target": "c13"
+    },
+    {
+      "source": "d145",
+      "target": "c14"
+    },
+    {
+      "source": "d129",
+      "target": "c14"
+    },
+    {
+      "source": "d040",
+      "target": "c14"
+    },
+    {
+      "source": "d164",
+      "target": "c14"
+    },
+    {
+      "source": "d031",
+      "target": "c14"
+    },
+    {
+      "source": "d106",
+      "target": "c14"
+    },
+    {
+      "source": "d124",
+      "target": "c15"
+    },
+    {
+      "source": "d169",
+      "target": "c15"
+    },
+    {
+      "source": "d087",
+      "target": "c15"
+    },
+    {
+      "source": "d003",
+      "target": "c15"
+    },
+    {
+      "source": "d151",
+      "target": "c15"
+    },
+    {
+      "source": "d038",
+      "target": "c16"
+    },
+    {
+      "source": "d061",
+      "target": "c16"
+    },
+    {
+      "source": "d143",
+      "target": "c16"
+    },
+    {
+      "source": "d028",
+      "target": "c16"
+    },
+    {
+      "source": "d002",
+      "target": "c16"
+    },
+    {
+      "source": "d176",
+      "target": "c16"
+    },
+    {
+      "source": "d019",
+      "target": "c16"
+    },
+    {
+      "source": "d068",
+      "target": "c17"
+    },
+    {
+      "source": "d037",
+      "target": "c17"
+    },
+    {
+      "source": "d102",
+      "target": "c17"
+    },
+    {
+      "source": "d060",
+      "target": "c17"
+    },
+    {
+      "source": "d099",
+      "target": "c17"
+    },
+    {
+      "source": "d052",
+      "target": "c17"
+    },
+    {
+      "source": "d128",
+      "target": "c18"
+    },
+    {
+      "source": "d120",
+      "target": "c18"
+    },
+    {
+      "source": "d089",
+      "target": "c18"
+    },
+    {
+      "source": "d025",
+      "target": "c18"
+    },
+    {
+      "source": "d105",
+      "target": "c18"
+    },
+    {
+      "source": "d149",
+      "target": "c18"
+    },
+    {
+      "source": "d140",
+      "target": "c19"
+    },
+    {
+      "source": "d010",
+      "target": "c19"
+    },
+    {
+      "source": "d019",
+      "target": "c19"
+    },
+    {
+      "source": "d006",
+      "target": "c19"
+    },
+    {
+      "source": "d147",
+      "target": "c19"
+    },
+    {
+      "source": "d107",
+      "target": "c19"
+    },
+    {
+      "source": "d086",
+      "target": "c19"
+    },
+    {
+      "source": "d049",
+      "target": "c20"
+    },
+    {
+      "source": "d103",
+      "target": "c20"
+    },
+    {
+      "source": "d074",
+      "target": "c20"
+    },
+    {
+      "source": "d144",
+      "target": "c20"
+    },
+    {
+      "source": "d150",
+      "target": "c20"
+    },
+    {
+      "source": "d023",
+      "target": "c20"
+    },
+    {
+      "source": "d108",
+      "target": "c20"
+    },
+    {
+      "source": "d005",
+      "target": "c21"
+    },
+    {
+      "source": "d130",
+      "target": "c21"
+    },
+    {
+      "source": "d080",
+      "target": "c21"
+    },
+    {
+      "source": "d092",
+      "target": "c21"
+    },
+    {
+      "source": "d007",
+      "target": "c21"
+    },
+    {
+      "source": "d029",
+      "target": "c21"
+    },
+    {
+      "source": "d033",
+      "target": "c21"
+    },
+    {
+      "source": "d026",
+      "target": "c21"
+    },
+    {
+      "source": "d146",
+      "target": "c21"
+    },
+    {
+      "source": "d066",
+      "target": "c22"
+    },
+    {
+      "source": "d082",
+      "target": "c22"
+    },
+    {
+      "source": "d015",
+      "target": "c22"
+    },
+    {
+      "source": "d016",
+      "target": "c22"
+    },
+    {
+      "source": "d013",
+      "target": "c22"
+    },
+    {
+      "source": "d008",
+      "target": "c22"
+    },
+    {
+      "source": "d047",
+      "target": "c23"
+    },
+    {
+      "source": "d055",
+      "target": "c23"
+    },
+    {
+      "source": "d088",
+      "target": "c23"
+    },
+    {
+      "source": "d015",
+      "target": "c23"
+    },
+    {
+      "source": "d133",
+      "target": "c23"
+    },
+    {
+      "source": "d032",
+      "target": "c23"
+    },
+    {
+      "source": "d101",
+      "target": "c24"
+    },
+    {
+      "source": "d148",
+      "target": "c24"
+    },
+    {
+      "source": "d179",
+      "target": "c24"
+    },
+    {
+      "source": "d090",
+      "target": "c24"
+    },
+    {
+      "source": "d070",
+      "target": "c24"
+    },
+    {
+      "source": "d159",
+      "target": "c24"
+    },
+    {
+      "source": "d115",
+      "target": "c24"
+    },
+    {
+      "source": "d174",
+      "target": "c24"
+    },
+    {
+      "source": "d083",
+      "target": "c24"
+    },
+    {
+      "source": "d095",
+      "target": "c25"
+    },
+    {
+      "source": "d064",
+      "target": "c25"
+    },
+    {
+      "source": "d011",
+      "target": "c25"
+    },
+    {
+      "source": "d042",
+      "target": "c25"
+    },
+    {
+      "source": "d065",
+      "target": "c25"
+    },
+    {
+      "source": "d155",
+      "target": "c25"
+    },
+    {
+      "source": "d009",
+      "target": "c26"
+    },
+    {
+      "source": "d131",
+      "target": "c26"
+    },
+    {
+      "source": "d138",
+      "target": "c26"
+    },
+    {
+      "source": "d021",
+      "target": "c26"
+    },
+    {
+      "source": "d141",
+      "target": "c26"
+    },
+    {
+      "source": "d126",
+      "target": "c26"
+    },
+    {
+      "source": "d073",
+      "target": "c27"
+    },
+    {
+      "source": "d154",
+      "target": "c27"
+    },
+    {
+      "source": "d075",
+      "target": "c27"
+    },
+    {
+      "source": "d033",
+      "target": "c27"
+    },
+    {
+      "source": "d166",
+      "target": "c27"
+    },
+    {
+      "source": "d153",
+      "target": "c27"
+    },
+    {
+      "source": "d062",
+      "target": "c28"
+    },
+    {
+      "source": "d096",
+      "target": "c28"
+    },
+    {
+      "source": "d118",
+      "target": "c28"
+    },
+    {
+      "source": "d018",
+      "target": "c28"
+    },
+    {
+      "source": "d165",
+      "target": "c28"
+    },
+    {
+      "source": "d069",
+      "target": "c28"
+    },
+    {
+      "source": "d167",
+      "target": "c28"
+    },
+    {
+      "source": "d117",
+      "target": "c29"
+    },
+    {
+      "source": "d098",
+      "target": "c29"
+    },
+    {
+      "source": "d056",
+      "target": "c29"
+    },
+    {
+      "source": "d121",
+      "target": "c29"
+    },
+    {
+      "source": "d162",
+      "target": "c29"
+    },
+    {
+      "source": "d171",
+      "target": "c29"
+    },
+    {
+      "source": "d063",
+      "target": "c29"
+    },
+    {
+      "source": "d046",
+      "target": "c29"
+    },
+    {
+      "source": "d163",
+      "target": "c30"
+    },
+    {
+      "source": "d078",
+      "target": "c30"
+    },
+    {
+      "source": "d030",
+      "target": "c30"
+    },
+    {
+      "source": "d035",
+      "target": "c30"
+    },
+    {
+      "source": "d027",
+      "target": "c30"
+    },
+    {
+      "source": "d059",
+      "target": "c30"
+    },
+    {
+      "source": "d020",
+      "target": "c30"
+    }
+  ]
+}

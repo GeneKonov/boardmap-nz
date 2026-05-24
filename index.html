@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BoardMap NZ</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#0f1117;color:#e8e8e8;height:100vh;overflow:hidden;display:flex;flex-direction:column}
+#topbar{display:flex;align-items:center;gap:12px;padding:10px 16px;background:#161820;border-bottom:1px solid #2a2d3a;flex-shrink:0;z-index:10}
+#logo{font-size:14px;font-weight:600;color:#fff;letter-spacing:-0.3px;white-space:nowrap}
+#logo span{color:#4a9eff}
+#search-wrap{position:relative;flex:1;max-width:340px}
+#search{width:100%;background:#0f1117;border:1px solid #2a2d3a;border-radius:6px;padding:7px 12px;color:#e8e8e8;font-size:13px;outline:none}
+#search:focus{border-color:#4a9eff}
+#search::placeholder{color:#555}
+#dropdown{position:absolute;top:calc(100% + 4px);left:0;right:0;background:#1e2130;border:1px solid #2a2d3a;border-radius:6px;overflow:hidden;z-index:100;display:none;max-height:220px;overflow-y:auto}
+.dd-item{padding:8px 12px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:8px}
+.dd-item:hover{background:#2a2d3a}
+.dd-badge{font-size:10px;padding:2px 6px;border-radius:3px;font-weight:500}
+.dd-co{background:#1a3a5c;color:#4a9eff}
+.dd-dir{background:#1a3a2a;color:#4ecb84}
+#refresh-label{font-size:11px;color:#555;white-space:nowrap;margin-left:auto}
+#main{display:flex;flex:1;overflow:hidden}
+#sidebar{width:220px;flex-shrink:0;background:#161820;border-right:1px solid #2a2d3a;padding:14px 12px;overflow-y:auto;font-size:12px}
+#sidebar h2{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
+.stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid #1e2130}
+.stat-label{color:#999;font-size:11px}
+.stat-val{color:#e8e8e8;font-weight:500;font-size:13px}
+.stat-link{color:#4a9eff;cursor:pointer;text-decoration:none}
+.stat-link:hover{text-decoration:underline}
+.stat-section{margin-bottom:14px}
+#graph-area{flex:1;position:relative;overflow:hidden}
+svg#graph{width:100%;height:100%}
+.node-co circle{stroke:#2a2d3a;stroke-width:1.5;cursor:pointer}
+.node-dir circle{stroke:#2a2d3a;stroke-width:1;cursor:pointer}
+.node text{font-size:9px;fill:#ccc;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.link{stroke:#2a2d3a;stroke-width:1;fill:none}
+.link.highlighted{stroke:#4a9eff;stroke-width:1.5;stroke-opacity:0.8}
+.link.dimmed{stroke-opacity:0.05}
+.node.dimmed circle{opacity:0.12}
+.node.dimmed text{opacity:0.1}
+.node.highlighted circle{stroke:#fff;stroke-width:2}
+#panel{position:absolute;top:0;right:0;bottom:0;width:260px;background:#161820;border-left:1px solid #2a2d3a;padding:16px;overflow-y:auto;display:none;z-index:5}
+#panel h3{font-size:14px;font-weight:600;color:#fff;margin-bottom:4px}
+#panel .meta{font-size:11px;color:#888;margin-bottom:14px}
+#panel .section-label{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:0.7px;margin-bottom:6px;margin-top:12px}
+#panel .pill{display:inline-block;background:#1e2130;border:1px solid #2a2d3a;border-radius:4px;padding:3px 8px;font-size:11px;color:#ccc;cursor:pointer;margin:2px 2px 2px 0}
+#panel .pill:hover{border-color:#4a9eff;color:#4a9eff}
+#panel .board-count{font-size:22px;font-weight:600;color:#4a9eff;margin-bottom:2px}
+#panel .board-label{font-size:11px;color:#888}
+#close-panel{position:absolute;top:12px;right:12px;background:none;border:none;color:#666;cursor:pointer;font-size:16px;line-height:1}
+#close-panel:hover{color:#ccc}
+.sector-legend{display:flex;flex-direction:column;gap:5px;margin-top:8px}
+.leg-row{display:flex;align-items:center;gap:6px;font-size:10px;color:#888}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+#hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:11px;color:#555;pointer-events:none;white-space:nowrap}
+.tooltip{position:absolute;background:#1e2130;border:1px solid #2a2d3a;border-radius:5px;padding:6px 10px;font-size:11px;color:#ccc;pointer-events:none;display:none;z-index:50;max-width:180px}
+#loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0f1117;font-size:13px;color:#555;z-index:20}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div id="logo">Board<span>Map</span> NZ</div>
+  <div id="search-wrap">
+    <input id="search" type="text" placeholder="Search companies or directors…" autocomplete="off">
+    <div id="dropdown"></div>
+  </div>
+  <div id="refresh-label" id="refresh-label">Loading…</div>
+</div>
+
+<div id="main">
+  <div id="sidebar">
+    <div class="stat-section">
+      <h2>Network overview</h2>
+      <div class="stat-row"><span class="stat-label">NZX top 30 companies</span><span class="stat-val" id="s-companies">30</span></div>
+      <div class="stat-row"><span class="stat-label">Total director seats</span><span class="stat-val" id="s-seats">—</span></div>
+      <div class="stat-row"><span class="stat-label">Unique directors</span><span class="stat-val" id="s-unique">—</span></div>
+      <div class="stat-row"><span class="stat-label">Avg board size</span><span class="stat-val" id="s-avgboard">—</span></div>
+    </div>
+    <div class="stat-section">
+      <h2>Interlocks</h2>
+      <div class="stat-row"><span class="stat-label">Directors on 2+ boards</span><span class="stat-val" id="s-multi">—</span></div>
+      <div class="stat-row"><span class="stat-label">Directors on 3+ boards</span><span class="stat-val" id="s-triple">—</span></div>
+      <div class="stat-row" style="flex-direction:column;align-items:flex-start;gap:3px;padding:6px 0">
+        <span class="stat-label">Most connected director</span>
+        <a class="stat-link" id="s-topdir" href="#">—</a>
+      </div>
+      <div class="stat-row" style="flex-direction:column;align-items:flex-start;gap:3px;padding:6px 0">
+        <span class="stat-label">Most connected company</span>
+        <a class="stat-link" id="s-topco" href="#">—</a>
+      </div>
+    </div>
+    <div class="stat-section">
+      <h2>Sectors</h2>
+      <div class="sector-legend" id="legend"></div>
+    </div>
+  </div>
+
+  <div id="graph-area">
+    <div id="loading">Loading board data…</div>
+    <svg id="graph"></svg>
+    <div id="hint">Click any node to explore · Scroll to zoom · Drag to pan</div>
+    <div class="tooltip" id="tooltip"></div>
+  </div>
+</div>
+
+<div id="panel">
+  <button id="close-panel">✕</button>
+  <div id="panel-content"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const SECTORS = {
+  'Financials':'#4a9eff','Energy':'#f5a623','Healthcare':'#4ecb84',
+  'Utilities':'#a78bfa','Real Estate':'#fb7185','Consumer':'#fbbf24',
+  'Infrastructure':'#67e8f9','Materials':'#c084fc','Technology':'#34d399',
+  'Industrials':'#f97316'
+};
+
+// Convert API-style "John James SMITH" to "John James Smith"
+function titleCase(name) {
+  return name.replace(/\w\S*/g, w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase());
+}
+
+// Shorten long company names for display in the graph
+function shortName(name) {
+  return name
+    .replace(' Corporation Limited', '').replace(' Holdings Limited', '')
+    .replace(' Group Limited', '').replace(' Limited', '')
+    .replace(' Co-operative Group', '').replace(' International', ' Intl');
+}
+
+fetch('graph.json')
+  .then(r => r.json())
+  .then(data => {
+    document.getElementById('loading').style.display = 'none';
+
+    // Update refresh label
+    const refreshed = data.meta && data.meta.refreshed
+      ? new Date(data.meta.refreshed).toLocaleDateString('en-NZ', {day:'numeric',month:'long',year:'numeric'})
+      : 'Live data';
+    document.getElementById('refresh-label').textContent = `Data as of ${refreshed}`;
+
+    // Split nodes into companies and directors
+    const COMPANIES = data.nodes
+      .filter(n => n.type === 'company')
+      .map(c => ({...c, displayName: shortName(c.name)}));
+
+    // Build boards list for each director from links
+    const boardsMap = {};
+    data.links.forEach(l => {
+      const src = l.source;
+      if (!boardsMap[src]) boardsMap[src] = [];
+      boardsMap[src].push(l.target);
+    });
+
+    const DIRECTORS_RAW = data.nodes
+      .filter(n => n.type === 'director')
+      .map(d => ({
+        ...d,
+        name: titleCase(d.name),
+        boards: boardsMap[d.id] || [],
+      }));
+
+    const coMap = {};
+    COMPANIES.forEach(c => coMap[c.id] = c);
+
+    const nodes = [
+      ...COMPANIES.map(c => ({...c, type:'company'})),
+      ...DIRECTORS_RAW.map(d => ({...d, type:'director', boardCount: d.boards.length}))
+    ];
+
+    const links = [];
+    DIRECTORS_RAW.forEach(d => {
+      d.boards.forEach(cid => {
+        links.push({source: d.id, target: cid, dirId: d.id, coId: cid});
+      });
+    });
+
+    const nodeById = {};
+    nodes.forEach(n => nodeById[n.id] = n);
+
+    const capExtent = d3.extent(COMPANIES, c => c.cap);
+    const coRadius = d3.scaleSqrt().domain(capExtent).range([14, 32]);
+    const dirRadius = d3.scaleSqrt().domain([1,4]).range([5, 11]);
+
+    function getR(n) {
+      return n.type === 'company' ? coRadius(n.cap) : dirRadius(Math.min(n.boardCount, 4));
+    }
+
+    const svg = d3.select('#graph');
+    const tooltip = document.getElementById('tooltip');
+    let width, height;
+
+    const container = svg.append('g').attr('id','container');
+    const linkLayer = container.append('g').attr('id','links');
+    const nodeLayer = container.append('g').attr('id','nodes');
+
+    const zoom = d3.zoom().scaleExtent([0.3, 5]).on('zoom', e => {
+      container.attr('transform', e.transform);
+    });
+    svg.call(zoom);
+
+    let simulation;
+    let linkSel, nodeSel;
+    let selectedNode = null;
+
+    function init() {
+      const rect = document.getElementById('graph-area').getBoundingClientRect();
+      width = rect.width; height = rect.height;
+      svg.attr('viewBox', `0 0 ${width} ${height}`);
+
+      simulation = d3.forceSimulation(nodes)
+        .force('link', d3.forceLink(links).id(d => d.id).distance(55).strength(0.4))
+        .force('charge', d3.forceManyBody().strength(d => d.type==='company' ? -280 : -60))
+        .force('center', d3.forceCenter(width/2, height/2))
+        .force('collision', d3.forceCollide().radius(d => getR(d) + 3))
+        .on('tick', ticked);
+
+      linkSel = linkLayer.selectAll('line')
+        .data(links)
+        .join('line')
+        .attr('class','link');
+
+      nodeSel = nodeLayer.selectAll('g.node')
+        .data(nodes)
+        .join('g')
+        .attr('class', d => `node node-${d.type==='company'?'co':'dir'}`)
+        .call(d3.drag()
+          .on('start', (e,d) => { if(!e.active) simulation.alphaTarget(0.3).restart(); d.fx=d.x; d.fy=d.y; })
+          .on('drag', (e,d) => { d.fx=e.x; d.fy=e.y; })
+          .on('end', (e,d) => { if(!e.active) simulation.alphaTarget(0); d.fx=null; d.fy=null; })
+        )
+        .on('mouseover', showTooltip)
+        .on('mousemove', moveTooltip)
+        .on('mouseout', hideTooltip)
+        .on('click', (e,d) => { e.stopPropagation(); selectNode(d); });
+
+      nodeSel.append('circle')
+        .attr('r', d => getR(d))
+        .attr('fill', d => d.type==='company' ? SECTORS[d.sector]||'#888' : '#334155')
+        .attr('fill-opacity', d => d.type==='company' ? 0.9 : 0.85);
+
+      nodeSel.filter(d => d.type==='company')
+        .append('text')
+        .text(d => d.ticker)
+        .attr('font-size', d => Math.max(7, coRadius(d.cap)*0.38)+'px')
+        .attr('font-weight','600')
+        .attr('fill','#fff')
+        .attr('text-anchor','middle')
+        .attr('dominant-baseline','central');
+
+      svg.on('click', () => { deselectAll(); closePanel(); });
+
+      computeStats();
+      buildLegend();
+      buildSearch();
+    }
+
+    function ticked() {
+      linkSel
+        .attr('x1', d => d.source.x).attr('y1', d => d.source.y)
+        .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
+      nodeSel.attr('transform', d => `translate(${d.x},${d.y})`);
+    }
+
+    function selectNode(d) {
+      selectedNode = d;
+      const connectedIds = new Set([d.id]);
+      const connectedLinks = new Set();
+
+      links.forEach((l, i) => {
+        const sid = l.source.id||l.source;
+        const tid = l.target.id||l.target;
+        if(sid===d.id||tid===d.id) {
+          connectedIds.add(sid);
+          connectedIds.add(tid);
+          connectedLinks.add(i);
+        }
+      });
+
+      linkSel.classed('highlighted', (_,i) => connectedLinks.has(i))
+             .classed('dimmed', (_,i) => !connectedLinks.has(i));
+      nodeSel.classed('highlighted', n => n.id===d.id)
+             .classed('dimmed', n => !connectedIds.has(n.id));
+
+      openPanel(d);
+    }
+
+    function deselectAll() {
+      selectedNode = null;
+      linkSel.classed('highlighted',false).classed('dimmed',false);
+      nodeSel.classed('highlighted',false).classed('dimmed',false);
+    }
+
+    function openPanel(d) {
+      const panel = document.getElementById('panel');
+      const pc = document.getElementById('panel-content');
+      panel.style.display = 'block';
+      document.getElementById('graph-area').style.marginRight = '260px';
+
+      if(d.type==='company') {
+        const dirList = DIRECTORS_RAW.filter(dir => dir.boards.includes(d.id));
+        const sharedCos = new Set();
+        dirList.forEach(dir => dir.boards.forEach(bid => { if(bid!==d.id) sharedCos.add(bid); }));
+        pc.innerHTML = `
+          <div class="board-count">${dirList.length}</div>
+          <div class="board-label">board seats</div>
+          <h3 style="margin-top:10px">${d.displayName || d.name}</h3>
+          <div class="meta">${d.ticker} · ${d.sector} · Market cap ~$${d.cap}B</div>
+          <div class="section-label">Current board</div>
+          ${dirList.map(dir => `<span class="pill" data-id="${dir.id}">${dir.name}</span>`).join('')}
+          <div class="section-label">Shared directors with</div>
+          ${[...sharedCos].map(cid => `<span class="pill" data-id="${cid}">${coMap[cid]?coMap[cid].ticker:'?'}</span>`).join('')}
+          <div class="stat-row" style="margin-top:10px"><span class="stat-label">Interlock count</span><span class="stat-val">${sharedCos.size}</span></div>`;
+      } else {
+        const coList = d.boards.map(cid => coMap[cid]).filter(Boolean);
+        pc.innerHTML = `
+          <div class="board-count">${d.boards.length}</div>
+          <div class="board-label">board${d.boards.length!==1?'s':''} served</div>
+          <h3 style="margin-top:10px">${d.name}</h3>
+          <div class="meta">Director</div>
+          <div class="section-label">Board memberships</div>
+          ${coList.map(c => `<span class="pill" data-id="${c.id}">${c.ticker} — ${c.displayName||c.name}</span>`).join('')}`;
+      }
+
+      panel.querySelectorAll('.pill[data-id]').forEach(el => {
+        el.addEventListener('click', () => {
+          const nd = nodeById[el.dataset.id];
+          if(nd) { selectNode(nd); centerOn(nd); }
+        });
+      });
+    }
+
+    function closePanel() {
+      document.getElementById('panel').style.display = 'none';
+      document.getElementById('graph-area').style.marginRight = '0';
+    }
+    document.getElementById('close-panel').addEventListener('click', () => { deselectAll(); closePanel(); });
+
+    function centerOn(d) {
+      const rect = document.getElementById('graph-area').getBoundingClientRect();
+      const cx = rect.width/2, cy = rect.height/2;
+      const t = d3.zoomIdentity.translate(cx - d.x*1.2, cy - d.y*1.2).scale(1.2);
+      svg.transition().duration(600).call(zoom.transform, t);
+    }
+
+    function showTooltip(e, d) {
+      let html = d.type==='company'
+        ? `<strong>${d.displayName||d.name}</strong><br>${d.sector} · $${d.cap}B cap`
+        : `<strong>${d.name}</strong><br>${d.boardCount} board${d.boardCount!==1?'s':''}`;
+      tooltip.innerHTML = html;
+      tooltip.style.display = 'block';
+      moveTooltip(e);
+    }
+    function moveTooltip(e) {
+      const area = document.getElementById('graph-area').getBoundingClientRect();
+      tooltip.style.left = (e.clientX - area.left + 10)+'px';
+      tooltip.style.top = (e.clientY - area.top - 30)+'px';
+    }
+    function hideTooltip() { tooltip.style.display = 'none'; }
+
+    function computeStats() {
+      const totalSeats = DIRECTORS_RAW.reduce((a,d) => a+d.boards.length, 0);
+      const uniqueDirs = DIRECTORS_RAW.length;
+      const multi = DIRECTORS_RAW.filter(d => d.boards.length >= 2).length;
+      const triple = DIRECTORS_RAW.filter(d => d.boards.length >= 3).length;
+      const avgBoard = (totalSeats / COMPANIES.length).toFixed(1);
+      const topDir = DIRECTORS_RAW.reduce((a,b) => b.boards.length > a.boards.length ? b : a);
+
+      const coCounts = {};
+      DIRECTORS_RAW.forEach(d => {
+        d.boards.forEach(cid => { coCounts[cid] = (coCounts[cid]||0) + (d.boards.length - 1); });
+      });
+      const topCoId = Object.entries(coCounts).sort((a,b) => b[1]-a[1])[0][0];
+      const topCo = coMap[topCoId];
+
+      document.getElementById('s-seats').textContent = totalSeats;
+      document.getElementById('s-unique').textContent = uniqueDirs;
+      document.getElementById('s-multi').textContent = multi;
+      document.getElementById('s-triple').textContent = triple;
+      document.getElementById('s-avgboard').textContent = avgBoard;
+
+      const tdEl = document.getElementById('s-topdir');
+      tdEl.textContent = `${topDir.name} (${topDir.boards.length} boards)`;
+      tdEl.onclick = (e) => { e.preventDefault(); const nd = nodeById[topDir.id]; if(nd){selectNode(nd);centerOn(nd);} };
+
+      const tcEl = document.getElementById('s-topco');
+      tcEl.textContent = topCo ? `${topCo.displayName||topCo.name}` : '—';
+      tcEl.onclick = (e) => { e.preventDefault(); const nd = nodeById[topCoId]; if(nd){selectNode(nd);centerOn(nd);} };
+    }
+
+    function buildLegend() {
+      const leg = document.getElementById('legend');
+      Object.entries(SECTORS).forEach(([sector, color]) => {
+        const row = document.createElement('div');
+        row.className = 'leg-row';
+        row.innerHTML = `<div class="leg-dot" style="background:${color}"></div>${sector}`;
+        leg.appendChild(row);
+      });
+    }
+
+    function buildSearch() {
+      const searchInput = document.getElementById('search');
+      const dropdown = document.getElementById('dropdown');
+
+      const searchItems = [
+        ...COMPANIES.map(c => ({id:c.id, label:c.displayName||c.name, sub:c.ticker, type:'company'})),
+        ...DIRECTORS_RAW.map(d => ({id:d.id, label:d.name, sub:`${d.boards.length} board${d.boards.length!==1?'s':''}`, type:'director'}))
+      ];
+
+      searchInput.addEventListener('input', () => {
+        const q = searchInput.value.toLowerCase().trim();
+        if(q.length < 2) { dropdown.style.display = 'none'; return; }
+        const results = searchItems.filter(i => i.label.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q)).slice(0,8);
+        if(!results.length) { dropdown.style.display = 'none'; return; }
+        dropdown.innerHTML = results.map(r =>
+          `<div class="dd-item" data-id="${r.id}">
+            <span class="dd-badge ${r.type==='company'?'dd-co':'dd-dir'}">${r.type==='company'?'CO':'DIR'}</span>
+            <span>${r.label}</span>
+            <span style="margin-left:auto;color:#555;font-size:10px">${r.sub}</span>
+          </div>`
+        ).join('');
+        dropdown.style.display = 'block';
+        dropdown.querySelectorAll('.dd-item').forEach(el => {
+          el.addEventListener('click', () => {
+            const nd = nodeById[el.dataset.id];
+            if(nd) { selectNode(nd); centerOn(nd); }
+            dropdown.style.display = 'none';
+            searchInput.value = '';
+          });
+        });
+      });
+
+      document.addEventListener('click', e => {
+        if(!document.getElementById('search-wrap').contains(e.target)) dropdown.style.display='none';
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      const rect = document.getElementById('graph-area').getBoundingClientRect();
+      width = rect.width; height = rect.height;
+      svg.attr('viewBox', `0 0 ${width} ${height}`);
+      if(simulation) simulation.force('center', d3.forceCenter(width/2, height/2)).alpha(0.1).restart();
+    });
+
+    init();
+  })
+  .catch(err => {
+    document.getElementById('loading').textContent = 'Failed to load graph.json — make sure it\'s in the same folder as index.html';
+    console.error(err);
+  });
+</script>
+</body>
+</html>

@@ -75,6 +75,23 @@ svg#graph{width:100%;height:100%}
 .a-body a:hover{text-decoration:underline}
 .a-body ul{padding-left:16px;display:flex;flex-direction:column;gap:3px;margin-top:4px}
 .a-footer{margin-top:20px;padding-top:16px;border-top:1px solid #252836;font-size:10px;color:#3a3d4a;line-height:1.6}
+#feedback-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100;display:none;align-items:center;justify-content:center;padding:24px 16px}
+#feedback-overlay.open{display:flex}
+#feedback-panel{background:#161820;border:1px solid #252836;border-radius:8px;padding:28px 28px 24px;max-width:460px;width:100%;position:relative}
+#feedback-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#555;cursor:pointer;font-size:16px;line-height:1;padding:2px}
+#feedback-close:hover{color:#ccc}
+.f-title{font-size:15px;font-weight:600;color:#fff;margin-bottom:18px}
+.f-field{margin-bottom:14px}
+.f-label{display:block;font-size:11px;color:#888;margin-bottom:5px;font-weight:500}
+.f-select,.f-input,.f-textarea{width:100%;background:#0f1117;border:1px solid #2a2d3a;border-radius:5px;padding:7px 10px;color:#e8e8e8;font-size:12px;outline:none;font-family:inherit}
+.f-select:focus,.f-input:focus,.f-textarea:focus{border-color:#4a9eff}
+.f-textarea{resize:vertical;min-height:90px}
+.f-submit{background:#4a9eff;border:none;border-radius:5px;color:#fff;font-size:12px;font-weight:600;padding:8px 18px;cursor:pointer;width:100%;margin-top:4px}
+.f-submit:hover{background:#3a8eef}
+.f-submit:disabled{opacity:0.5;cursor:default}
+.f-status{font-size:12px;margin-top:10px;text-align:center;min-height:18px}
+.f-status.ok{color:#4ecb84}
+.f-status.err{color:#fb7185}
 </style>
 </head>
 <body>
@@ -88,7 +105,7 @@ svg#graph{width:100%;height:100%}
   <div id="topbar-right">
     <span id="refresh-label">Loading…</span>
     <button id="about-btn">About</button>
-    <a id="feedback-btn" href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">Feedback</a>
+    <button id="feedback-btn">Feedback</button>
   </div>
 </div>
 
@@ -179,7 +196,7 @@ svg#graph{width:100%;height:100%}
 
     <div class="a-section">
       <div class="a-section-title">Who built this?</div>
-      <div class="a-body">BoardMap NZ is a solo public-interest project. It is free, ad-free, and has no commercial purpose. If you spot an error or a board change that hasn't been reflected yet, please <a href="FEEDBACK_FORM_URL" target="_blank" rel="noopener">get in touch</a>.</div>
+      <div class="a-body">BoardMap NZ is a solo public-interest project. It is free, ad-free, and has no commercial purpose. If you spot an error or a board change that hasn't been reflected yet, please <a href="#" id="about-feedback-link">get in touch</a>.</div>
     </div>
 
     <div class="a-footer">
@@ -187,6 +204,36 @@ svg#graph{width:100%;height:100%}
       BoardMap NZ is not affiliated with NZX, MBIE, or any listed company.<br>
       Director data sourced live from the NZ Companies Register.
     </div>
+  </div>
+</div>
+
+<div id="feedback-overlay">
+  <div id="feedback-panel">
+    <button id="feedback-close">✕</button>
+    <div class="f-title">Send feedback</div>
+    <div class="f-field">
+      <label class="f-label" for="f-type">Type</label>
+      <select class="f-select" id="f-type">
+        <option value="Data error">Data error</option>
+        <option value="Board change not reflected">Board change not reflected</option>
+        <option value="Suggestion">Suggestion</option>
+        <option value="Other">Other</option>
+      </select>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="f-desc">Description <span style="color:#fb7185">*</span></label>
+      <textarea class="f-textarea" id="f-desc" placeholder="What did you notice?"></textarea>
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="f-entity">Company or director (optional)</label>
+      <input class="f-input" id="f-entity" type="text" placeholder="e.g. Fisher &amp; Paykel Healthcare">
+    </div>
+    <div class="f-field">
+      <label class="f-label" for="f-name">Your name (optional)</label>
+      <input class="f-input" id="f-name" type="text" placeholder="Anonymous">
+    </div>
+    <button class="f-submit" id="f-submit">Send</button>
+    <div class="f-status" id="f-status"></div>
   </div>
 </div>
 
@@ -528,6 +575,72 @@ fetch('graph.json')
     document.getElementById('about-overlay').addEventListener('click', e => {
       if(e.target === document.getElementById('about-overlay'))
         document.getElementById('about-overlay').classList.remove('open');
+    });
+
+    const SUPABASE_URL = 'https://himxexqnhzgajfdumquz.supabase.co';
+    const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhpbXhleHFuaHpnYWpmZHVtcXV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2MjA1MzEsImV4cCI6MjA5MTE5NjUzMX0.-YxU2rprPWfU3_CfDR3QhuxKwA54RPvcw6agg72Uonw';
+
+    function openFeedback() {
+      document.getElementById('feedback-overlay').classList.add('open');
+    }
+    function closeFeedback() {
+      document.getElementById('feedback-overlay').classList.remove('open');
+      document.getElementById('f-status').textContent = '';
+      document.getElementById('f-status').className = 'f-status';
+    }
+
+    document.getElementById('feedback-btn').addEventListener('click', openFeedback);
+    document.getElementById('feedback-close').addEventListener('click', closeFeedback);
+    document.getElementById('feedback-overlay').addEventListener('click', e => {
+      if (e.target === document.getElementById('feedback-overlay')) closeFeedback();
+    });
+
+    document.getElementById('about-feedback-link').addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('about-overlay').classList.remove('open');
+      openFeedback();
+    });
+
+    document.getElementById('f-submit').addEventListener('click', async () => {
+      const desc = document.getElementById('f-desc').value.trim();
+      if (!desc) {
+        const s = document.getElementById('f-status');
+        s.textContent = 'Description is required.';
+        s.className = 'f-status err';
+        return;
+      }
+      const btn = document.getElementById('f-submit');
+      const status = document.getElementById('f-status');
+      btn.disabled = true;
+      btn.textContent = 'Sending…';
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/feedback`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON,
+            'Authorization': `Bearer ${SUPABASE_ANON}`,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            type: document.getElementById('f-type').value,
+            description: desc,
+            entity: document.getElementById('f-entity').value.trim() || null,
+            name: document.getElementById('f-name').value.trim() || null,
+          })
+        });
+        if (!res.ok) throw new Error(res.status);
+        status.textContent = 'Thank you — feedback received.';
+        status.className = 'f-status ok';
+        document.getElementById('f-desc').value = '';
+        document.getElementById('f-entity').value = '';
+        document.getElementById('f-name').value = '';
+      } catch {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'f-status err';
+      }
+      btn.disabled = false;
+      btn.textContent = 'Send';
     });
 
     window.addEventListener('resize', () => {

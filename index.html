@@ -57,6 +57,22 @@ svg#graph{width:100%;height:100%}
 #hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);font-size:11px;color:#555;pointer-events:none;white-space:nowrap}
 .tooltip{position:absolute;background:#1e2130;border:1px solid #2a2d3a;border-radius:5px;padding:6px 10px;font-size:11px;color:#ccc;pointer-events:none;display:none;z-index:50;max-width:180px}
 #loading{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:#0f1117;font-size:13px;color:#555;z-index:20}
+#topbar-right{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
+#about-btn{background:none;border:1px solid #252836;border-radius:5px;color:#777;font-size:11px;padding:5px 10px;cursor:pointer;white-space:nowrap;transition:color 0.15s,border-color 0.15s}
+#about-btn:hover{color:#ccc;border-color:#444}
+#about-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:100;display:none;align-items:center;justify-content:center;padding:24px 16px}
+#about-overlay.open{display:flex}
+#about-panel{background:#161820;border:1px solid #252836;border-radius:8px;padding:28px 28px 24px;max-width:560px;width:100%;max-height:85vh;overflow-y:auto;position:relative}
+#about-close{position:absolute;top:14px;right:14px;background:none;border:none;color:#555;cursor:pointer;font-size:16px;line-height:1;padding:2px}
+#about-close:hover{color:#ccc}
+.a-title{font-size:16px;font-weight:600;color:#fff;margin-bottom:20px}
+.a-section{margin-bottom:20px}
+.a-section-title{font-size:11px;font-weight:600;color:#4a9eff;margin-bottom:6px;text-transform:uppercase;letter-spacing:0.6px}
+.a-body{font-size:12px;color:#888;line-height:1.75}
+.a-body a{color:#4a9eff;text-decoration:none}
+.a-body a:hover{text-decoration:underline}
+.a-body ul{padding-left:16px;display:flex;flex-direction:column;gap:3px;margin-top:4px}
+.a-footer{margin-top:20px;padding-top:16px;border-top:1px solid #252836;font-size:10px;color:#3a3d4a;line-height:1.6}
 </style>
 </head>
 <body>
@@ -67,7 +83,10 @@ svg#graph{width:100%;height:100%}
     <input id="search" type="text" placeholder="Search companies or directors…" autocomplete="off">
     <div id="dropdown"></div>
   </div>
-  <div id="refresh-label" id="refresh-label">Loading…</div>
+  <div id="topbar-right">
+    <span id="refresh-label">Loading…</span>
+    <button id="about-btn">About</button>
+  </div>
 </div>
 
 <div id="main">
@@ -109,6 +128,63 @@ svg#graph{width:100%;height:100%}
 <div id="panel">
   <button id="close-panel">✕</button>
   <div id="panel-content"></div>
+</div>
+
+<div id="about-overlay">
+  <div id="about-panel">
+    <button id="about-close">✕</button>
+    <div class="a-title">About BoardMap NZ</div>
+
+    <div class="a-section">
+      <div class="a-section-title">What is this?</div>
+      <div class="a-body">BoardMap NZ maps the boards of directors of the NZX top 30 companies and surfaces the connections between them — where the same individual sits on multiple boards, a pattern known as an interlocking directorship. The goal is not to allege wrongdoing, but to inform: to give journalists, investors, students, and curious New Zealanders a clear starting point for understanding how corporate governance in NZ actually looks.</div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">What is an interlocking directorship?</div>
+      <div class="a-body">An interlocking directorship occurs when a person sits on the boards of two or more companies simultaneously. In a small economy like New Zealand, this is common and not inherently problematic — experienced directors are in high demand. But the pattern is worth understanding: shared board members can create information flows, alignments of interest, or potential conflicts that are not always visible to outside observers.</div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">Where does the data come from?</div>
+      <div class="a-body">All data is sourced from the <a href="https://companies.govt.nz" target="_blank" rel="noopener">NZ Companies Register</a>, maintained by the Companies Office (MBIE) and freely available as a public record. Director appointments and resignations are legally required to be filed with the Register. The list of NZX top 30 companies is manually curated based on market capitalisation and updated periodically.</div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">How current is the data?</div>
+      <div class="a-body">BoardMap NZ is not a live feed. Data is refreshed manually and reflects the Companies Register at the time of the last update, shown in the top bar. The target refresh cadence is quarterly, or following a significant board change at an NZX top 30 company.</div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">What the data doesn't show</div>
+      <div class="a-body">
+        <ul>
+          <li>Board observer or advisory roles not formally registered</li>
+          <li>Executive roles (CEO, CFO) — governance roles only</li>
+          <li>Board committee memberships (audit, remuneration, risk)</li>
+          <li>Shareholder or ownership relationships</li>
+          <li>Historical board compositions over time</li>
+          <li>Private or unlisted companies</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">Methodology</div>
+      <div class="a-body">Director names are normalised using fuzzy string matching to resolve minor inconsistencies across company registrations. Each merge is logged and reviewed manually. Node size reflects data only: company nodes are sized by market cap; director nodes by number of current board seats. Colour encodes sector. No visual choices imply a judgement about any individual or company.</div>
+    </div>
+
+    <div class="a-section">
+      <div class="a-section-title">Who built this?</div>
+      <div class="a-body">BoardMap NZ is a solo public-interest project. It is free, ad-free, and has no commercial purpose. If you spot an error or a board change that hasn't been reflected yet, please get in touch.</div>
+    </div>
+
+    <div class="a-footer">
+      Data sourced from the NZ Companies Register (MBIE) under open access.<br>
+      BoardMap NZ is not affiliated with NZX, MBIE, or any listed company.<br>
+      Director data sourced live from the NZ Companies Register.
+    </div>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -439,6 +515,17 @@ fetch('graph.json')
         if(!document.getElementById('search-wrap').contains(e.target)) dropdown.style.display='none';
       });
     }
+
+    document.getElementById('about-btn').addEventListener('click', () => {
+      document.getElementById('about-overlay').classList.add('open');
+    });
+    document.getElementById('about-close').addEventListener('click', () => {
+      document.getElementById('about-overlay').classList.remove('open');
+    });
+    document.getElementById('about-overlay').addEventListener('click', e => {
+      if(e.target === document.getElementById('about-overlay'))
+        document.getElementById('about-overlay').classList.remove('open');
+    });
 
     window.addEventListener('resize', () => {
       const rect = document.getElementById('graph-area').getBoundingClientRect();

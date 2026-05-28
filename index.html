@@ -92,6 +92,24 @@ svg#graph{width:100%;height:100%}
 .f-status{font-size:12px;margin-top:10px;text-align:center;min-height:18px}
 .f-status.ok{color:#4ecb84}
 .f-status.err{color:#fb7185}
+.leg-row{cursor:pointer;border-radius:3px;padding:2px 4px;margin:-2px -4px;transition:opacity 0.15s}
+.leg-row:hover{background:#1e2130}
+.leg-row.sector-dimmed{opacity:0.25}
+.node.sector-dimmed circle{opacity:0.06}
+.node.sector-dimmed text{opacity:0.05}
+.link.sector-dimmed{stroke-opacity:0.02}
+.node.highlighted circle{stroke:#fff;stroke-width:2;opacity:1}
+.node-dir .dir-label{dominant-baseline:hanging}
+#reset-view{position:absolute;bottom:44px;right:14px;background:#161820;border:1px solid #2a2d3a;border-radius:5px;color:#555;font-size:10px;padding:5px 9px;cursor:pointer;z-index:6;transition:color 0.15s,border-color 0.15s}
+#reset-view:hover{color:#ccc;border-color:#444}
+.filter-row{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.filter-chip{background:none;border:1px solid #2a2d3a;border-radius:10px;color:#666;font-size:10px;padding:2px 8px;cursor:pointer;transition:all 0.15s}
+.filter-chip:hover{border-color:#4a9eff;color:#4a9eff}
+.filter-chip.active{background:#4a9eff;border-color:#4a9eff;color:#fff}
+#csv-btn{width:100%;margin-top:8px;background:none;border:1px solid #2a2d3a;border-radius:5px;color:#666;font-size:11px;padding:6px;cursor:pointer;transition:all 0.15s;text-align:center}
+#csv-btn:hover{border-color:#4ecb84;color:#4ecb84}
+.dd-item.kbd-focus{background:#2a2d3a}
+@media(max-width:768px){body{overflow:auto}#sidebar{display:none}#main{flex-direction:column}#graph-area{min-height:65vw}#panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;max-height:55vh;border-left:none;border-top:1px solid #2a2d3a}#topbar{flex-wrap:wrap;gap:8px}#search-wrap{order:3;max-width:none;flex-basis:100%}#topbar-right{gap:6px}}
 </style>
 </head>
 <body>
@@ -99,7 +117,7 @@ svg#graph{width:100%;height:100%}
 <div id="topbar">
   <div id="logo">Board<span>Map</span> NZ</div>
   <div id="search-wrap">
-    <input id="search" type="text" placeholder="Search companies or directors…" autocomplete="off">
+    <input id="search" type="text" placeholder="Search… (press /)" autocomplete="off" aria-label="Search companies or directors">
     <div id="dropdown"></div>
   </div>
   <div id="topbar-right">
@@ -130,17 +148,27 @@ svg#graph{width:100%;height:100%}
         <span class="stat-label">Most connected company</span>
         <a class="stat-link" id="s-topco" href="#">—</a>
       </div>
+      <div style="padding:6px 0 2px">
+        <span class="stat-label">Show directors</span>
+        <div class="filter-row">
+          <button class="filter-chip active" data-min="1">All</button>
+          <button class="filter-chip" data-min="2">2+ boards</button>
+          <button class="filter-chip" data-min="3">3+ boards</button>
+        </div>
+      </div>
     </div>
     <div class="stat-section">
       <h2>Sectors</h2>
       <div class="sector-legend" id="legend"></div>
     </div>
+    <button id="csv-btn" title="Download full board composition as CSV">↓ Download board data (CSV)</button>
   </div>
 
   <div id="graph-area">
     <div id="loading">Loading board data…</div>
     <svg id="graph"></svg>
     <div id="hint">Click any node to explore · Scroll to zoom · Drag to pan</div>
+    <button id="reset-view" title="Reset zoom and pan">⌂ Reset</button>
     <div class="tooltip" id="tooltip"></div>
   </div>
 </div>
@@ -150,10 +178,10 @@ svg#graph{width:100%;height:100%}
   <div id="panel-content"></div>
 </div>
 
-<div id="about-overlay">
+<div id="about-overlay" role="dialog" aria-modal="true" aria-labelledby="about-title">
   <div id="about-panel">
-    <button id="about-close">✕</button>
-    <div class="a-title">About BoardMap NZ</div>
+    <button id="about-close" aria-label="Close">✕</button>
+    <div class="a-title" id="about-title">About BoardMap NZ</div>
 
     <div class="a-section">
       <div class="a-section-title">What is this?</div>
@@ -207,10 +235,10 @@ svg#graph{width:100%;height:100%}
   </div>
 </div>
 
-<div id="feedback-overlay">
+<div id="feedback-overlay" role="dialog" aria-modal="true" aria-labelledby="feedback-title">
   <div id="feedback-panel">
-    <button id="feedback-close">✕</button>
-    <div class="f-title">Send feedback</div>
+    <button id="feedback-close" aria-label="Close">✕</button>
+    <div class="f-title" id="feedback-title">Send feedback</div>
     <div class="f-field">
       <label class="f-label" for="f-type">Type</label>
       <select class="f-select" id="f-type">
@@ -379,6 +407,16 @@ fetch('graph.json')
         .attr('text-anchor','middle')
         .attr('dominant-baseline','central');
 
+      nodeSel.filter(d => d.type==='director' && d.boardCount >= 2)
+        .append('text')
+        .attr('class','dir-label')
+        .text(d => d.name.split(' ').pop())
+        .attr('font-size','8px')
+        .attr('fill','#9ca3af')
+        .attr('text-anchor','middle')
+        .attr('pointer-events','none')
+        .attr('y', d => getR(d) + 2);
+
       svg.on('click', () => { deselectAll(); closePanel(); });
 
       computeStats();
@@ -394,6 +432,7 @@ fetch('graph.json')
     }
 
     function selectNode(d) {
+      history.replaceState(null, '', `?node=${d.id}`);
       selectedNode = d;
       const connectedIds = new Set([d.id]);
       const connectedLinks = new Set();
@@ -417,6 +456,7 @@ fetch('graph.json')
     }
 
     function deselectAll() {
+      history.replaceState(null, '', location.pathname);
       selectedNode = null;
       linkSel.classed('highlighted',false).classed('dimmed',false);
       nodeSel.classed('highlighted',false).classed('dimmed',false);
@@ -519,12 +559,42 @@ fetch('graph.json')
       tcEl.onclick = (e) => { e.preventDefault(); const nd = nodeById[topCoId]; if(nd){selectNode(nd);centerOn(nd);} };
     }
 
+    let activeSector = null;
+
+    function filterBySector(sector) {
+      if (activeSector === sector) {
+        activeSector = null;
+        nodeSel.classed('sector-dimmed', false);
+        linkSel.classed('sector-dimmed', false);
+        document.querySelectorAll('.leg-row').forEach(r => r.classList.remove('sector-dimmed'));
+      } else {
+        activeSector = sector;
+        nodeSel.classed('sector-dimmed', d => {
+          if (d.type === 'company') return d.sector !== sector;
+          return !d.boards.some(cid => coMap[cid] && coMap[cid].sector === sector);
+        });
+        linkSel.classed('sector-dimmed', l => {
+          const tgt = nodeById[l.target.id || l.target];
+          return !tgt || tgt.sector !== sector;
+        });
+        document.querySelectorAll('.leg-row').forEach(r => {
+          r.classList.toggle('sector-dimmed', r.dataset.sector !== sector);
+        });
+      }
+    }
+
     function buildLegend() {
       const leg = document.getElementById('legend');
       Object.entries(SECTORS).forEach(([sector, color]) => {
         const row = document.createElement('div');
         row.className = 'leg-row';
+        row.dataset.sector = sector;
+        row.title = `Filter to ${sector}`;
+        row.setAttribute('role', 'button');
+        row.setAttribute('tabindex', '0');
         row.innerHTML = `<div class="leg-dot" style="background:${color}"></div>${sector}`;
+        row.addEventListener('click', () => filterBySector(sector));
+        row.addEventListener('keydown', e => { if(e.key==='Enter'||e.key===' ') { e.preventDefault(); filterBySector(sector); }});
         leg.appendChild(row);
       });
     }
@@ -538,20 +608,26 @@ fetch('graph.json')
         ...DIRECTORS_RAW.map(d => ({id:d.id, label:d.name, sub:`${d.boards.length} board${d.boards.length!==1?'s':''}`, type:'director'}))
       ];
 
-      searchInput.addEventListener('input', () => {
-        const q = searchInput.value.toLowerCase().trim();
+      let ddFocusIdx = -1;
+
+      function renderDropdown(q) {
+        ddFocusIdx = -1;
         if(q.length < 2) { dropdown.style.display = 'none'; return; }
         const results = searchItems.filter(i => i.label.toLowerCase().includes(q) || i.sub.toLowerCase().includes(q)).slice(0,8);
-        if(!results.length) { dropdown.style.display = 'none'; return; }
+        if(!results.length) {
+          dropdown.innerHTML = '<div class="dd-item" style="color:#555;cursor:default">No results</div>';
+          dropdown.style.display = 'block';
+          return;
+        }
         dropdown.innerHTML = results.map(r =>
-          `<div class="dd-item" data-id="${r.id}">
+          `<div class="dd-item" data-id="${r.id}" role="option" tabindex="-1">
             <span class="dd-badge ${r.type==='company'?'dd-co':'dd-dir'}">${r.type==='company'?'CO':'DIR'}</span>
             <span>${r.label}</span>
             <span style="margin-left:auto;color:#555;font-size:10px">${r.sub}</span>
           </div>`
         ).join('');
         dropdown.style.display = 'block';
-        dropdown.querySelectorAll('.dd-item').forEach(el => {
+        dropdown.querySelectorAll('.dd-item[data-id]').forEach(el => {
           el.addEventListener('click', () => {
             const nd = nodeById[el.dataset.id];
             if(nd) { selectNode(nd); centerOn(nd); }
@@ -559,6 +635,30 @@ fetch('graph.json')
             searchInput.value = '';
           });
         });
+      }
+
+      searchInput.addEventListener('input', () => {
+        renderDropdown(searchInput.value.toLowerCase().trim());
+      });
+
+      searchInput.addEventListener('keydown', e => {
+        const items = [...dropdown.querySelectorAll('.dd-item[data-id]')];
+        if(!items.length || dropdown.style.display === 'none') return;
+        if(e.key === 'ArrowDown') {
+          e.preventDefault();
+          ddFocusIdx = Math.min(ddFocusIdx + 1, items.length - 1);
+          items.forEach((el, i) => el.classList.toggle('kbd-focus', i === ddFocusIdx));
+          items[ddFocusIdx].scrollIntoView({block:'nearest'});
+        } else if(e.key === 'ArrowUp') {
+          e.preventDefault();
+          ddFocusIdx = Math.max(ddFocusIdx - 1, 0);
+          items.forEach((el, i) => el.classList.toggle('kbd-focus', i === ddFocusIdx));
+          items[ddFocusIdx].scrollIntoView({block:'nearest'});
+        } else if(e.key === 'Enter' && ddFocusIdx >= 0) {
+          e.preventDefault();
+          items[ddFocusIdx].click();
+          ddFocusIdx = -1;
+        }
       });
 
       document.addEventListener('click', e => {
@@ -642,6 +742,83 @@ fetch('graph.json')
       btn.disabled = false;
       btn.textContent = 'Send';
     });
+
+    // A5: reset view
+    document.getElementById('reset-view').addEventListener('click', () => {
+      svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+    });
+
+    // B1: interlock filter
+    let minBoards = 1;
+    function applyBoardFilter(min) {
+      minBoards = min;
+      document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.classList.toggle('active', parseInt(chip.dataset.min) === min);
+      });
+      nodeSel.each(function(d) {
+        if(d.type === 'director') d3.select(this).style('display', d.boardCount < min ? 'none' : null);
+      });
+      linkSel.each(function(l) {
+        const dir = nodeById[l.source.id || l.source];
+        d3.select(this).style('display', (dir && dir.type === 'director' && dir.boardCount < min) ? 'none' : null);
+      });
+    }
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+      chip.addEventListener('click', () => applyBoardFilter(parseInt(chip.dataset.min)));
+    });
+
+    // B4: CSV export
+    document.getElementById('csv-btn').addEventListener('click', () => {
+      const rows = [['Director','Company','Ticker','Sector']];
+      DIRECTORS_RAW.forEach(d => {
+        d.boards.forEach(cid => {
+          const co = coMap[cid];
+          if(co) rows.push([d.name, co.displayName||co.name, co.ticker, co.sector]);
+        });
+      });
+      const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], {type:'text/csv'}));
+      a.download = 'boardmap-nz.csv';
+      a.click();
+    });
+
+    // A1+A2: keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if(e.key === 'Escape') {
+        if(document.getElementById('feedback-overlay').classList.contains('open')) { closeFeedback(); return; }
+        if(document.getElementById('about-overlay').classList.contains('open')) { document.getElementById('about-overlay').classList.remove('open'); return; }
+        if(document.getElementById('panel').style.display === 'block') { deselectAll(); closePanel(); }
+        return;
+      }
+      const tag = document.activeElement.tagName;
+      if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT') return;
+      if(e.key==='/' || (e.key==='k' && (e.ctrlKey||e.metaKey))) {
+        e.preventDefault();
+        const s = document.getElementById('search');
+        s.focus(); s.select();
+      }
+    });
+
+    // E3: focus trap in modals
+    function trapFocus(overlayId) {
+      document.getElementById(overlayId).addEventListener('keydown', function(e) {
+        if(e.key !== 'Tab' || !this.classList.contains('open')) return;
+        const focusable = this.querySelectorAll('button,input,select,textarea,a[href],[tabindex]:not([tabindex="-1"])');
+        if(!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length-1];
+        if(e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      });
+    }
+    trapFocus('about-overlay');
+    trapFocus('feedback-overlay');
+
+    // B3: deep-link — auto-select node from URL on load
+    const urlNode = new URLSearchParams(location.search).get('node');
+    if(urlNode && nodeById[urlNode]) {
+      setTimeout(() => { selectNode(nodeById[urlNode]); centerOn(nodeById[urlNode]); }, 300);
+    }
 
     window.addEventListener('resize', () => {
       const rect = document.getElementById('graph-area').getBoundingClientRect();

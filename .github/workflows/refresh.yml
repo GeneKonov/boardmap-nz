@@ -1,0 +1,36 @@
+name: Refresh board data
+
+on:
+  schedule:
+    # Every Sunday at 14:00 UTC (2am NZT Monday)
+    - cron: '0 14 * * 0'
+  workflow_dispatch:
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests python-Levenshtein fuzzywuzzy
+
+      - name: Run pipeline
+        env:
+          MBIE_API_KEY: ${{ secrets.MBIE_API_KEY }}
+        run: python pipeline.py
+
+      - name: Commit updated graph.json
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add graph.json
+          git diff --cached --quiet || git commit -m "Refresh board data [skip ci]"
+          git push

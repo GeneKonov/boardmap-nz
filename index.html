@@ -21,7 +21,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
 .dd-co{background:#1a3a5c;color:#4a9eff}
 .dd-dir{background:#1a3a2a;color:#4ecb84}
 #refresh-label{font-size:11px;color:#555;white-space:nowrap}
-#main{display:flex;flex:1;overflow:hidden}
+#main{display:flex;flex:1;overflow:hidden;position:relative}
 #sidebar{width:220px;flex-shrink:0;min-height:0;background:#161820;border-right:1px solid #2a2d3a;padding:14px 12px;overflow-y:auto;font-size:12px;scrollbar-width:thin;scrollbar-color:#2a2d3a transparent}
 #sidebar h2{font-size:11px;font-weight:600;color:#888;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:10px}
 .stat-row{display:flex;justify-content:space-between;align-items:baseline;padding:4px 0;border-bottom:1px solid #1e2130}
@@ -241,11 +241,11 @@ body.light-mode .node.sector-dimmed circle{opacity:0.08}
     <button id="reset-view" title="Reset zoom and pan">⌂ Reset</button>
     <div class="tooltip" id="tooltip"></div>
   </div>
-</div>
 
-<div id="panel">
-  <button id="close-panel">✕</button>
-  <div id="panel-content"></div>
+  <div id="panel">
+    <button id="close-panel">✕</button>
+    <div id="panel-content"></div>
+  </div>
 </div>
 
 <div id="about-overlay" role="dialog" aria-modal="true" aria-labelledby="about-title">

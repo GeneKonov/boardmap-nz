@@ -109,7 +109,69 @@ svg#graph{width:100%;height:100%}
 #csv-btn{width:100%;margin-top:8px;background:none;border:1px solid #2a2d3a;border-radius:5px;color:#666;font-size:11px;padding:6px;cursor:pointer;transition:all 0.15s;text-align:center}
 #csv-btn:hover{border-color:#4ecb84;color:#4ecb84}
 .dd-item.kbd-focus{background:#2a2d3a}
+.co-label{fill:#aaa;pointer-events:none;text-anchor:middle;dominant-baseline:auto;transition:opacity 0.2s}
 @media(max-width:768px){body{overflow:auto}#sidebar{display:none}#main{flex-direction:column}#graph-area{min-height:65vw}#panel{position:fixed;left:0;right:0;bottom:0;top:auto;width:100%;max-height:55vh;border-left:none;border-top:1px solid #2a2d3a}#topbar{flex-wrap:wrap;gap:8px}#search-wrap{order:3;max-width:none;flex-basis:100%}#topbar-right{gap:6px}}
+/* ── Light mode ── */
+body.light-mode{background:#f0f2f5;color:#0f172a}
+body.light-mode #topbar{background:#fff;border-color:#e2e8f0}
+body.light-mode #sidebar{background:#fff;border-color:#e2e8f0}
+body.light-mode #sidebar h2{color:#94a3b8}
+body.light-mode .stat-row{border-color:#f1f5f9}
+body.light-mode .stat-label{color:#64748b}
+body.light-mode .stat-val{color:#0f172a}
+body.light-mode .stat-link{color:#2563eb}
+body.light-mode #search{background:#f8fafc;border-color:#e2e8f0;color:#0f172a}
+body.light-mode #search::placeholder{color:#cbd5e1}
+body.light-mode #dropdown{background:#fff;border-color:#e2e8f0}
+body.light-mode .dd-item:hover,body.light-mode .dd-item.kbd-focus{background:#f1f5f9}
+body.light-mode #refresh-label{color:#94a3b8}
+body.light-mode #about-btn,body.light-mode #feedback-btn,body.light-mode #theme-btn{color:#64748b;border-color:#e2e8f0}
+body.light-mode #about-btn:hover,body.light-mode #theme-btn:hover{color:#0f172a;border-color:#94a3b8}
+body.light-mode #feedback-btn:hover{color:#16a34a;border-color:#16a34a}
+body.light-mode #panel{background:#fff;border-color:#e2e8f0}
+body.light-mode #panel h3{color:#0f172a}
+body.light-mode #panel .meta{color:#64748b}
+body.light-mode #panel .section-label{color:#94a3b8}
+body.light-mode #panel .pill{background:#f8fafc;border-color:#e2e8f0;color:#374151}
+body.light-mode #panel .pill:hover{border-color:#2563eb;color:#2563eb}
+body.light-mode #panel .board-count{color:#2563eb}
+body.light-mode #panel .board-label{color:#64748b}
+body.light-mode #close-panel{color:#94a3b8}
+body.light-mode #close-panel:hover{color:#374151}
+body.light-mode .leg-row{color:#374151}
+body.light-mode .leg-row:hover{background:#f1f5f9}
+body.light-mode .leg-row.sector-dimmed{opacity:0.3}
+body.light-mode #hint{color:#94a3b8}
+body.light-mode .tooltip{background:#fff;border-color:#e2e8f0;color:#374151}
+body.light-mode #loading{background:#f0f2f5;color:#64748b}
+body.light-mode #reset-view{background:#fff;border-color:#e2e8f0;color:#64748b}
+body.light-mode #reset-view:hover{color:#0f172a;border-color:#94a3b8}
+body.light-mode .filter-chip{border-color:#e2e8f0;color:#64748b}
+body.light-mode .filter-chip:hover{border-color:#2563eb;color:#2563eb}
+body.light-mode .filter-chip.active{background:#2563eb;border-color:#2563eb;color:#fff}
+body.light-mode #csv-btn{border-color:#e2e8f0;color:#64748b}
+body.light-mode #csv-btn:hover{border-color:#16a34a;color:#16a34a}
+body.light-mode #about-overlay,body.light-mode #feedback-overlay{background:rgba(0,0,0,0.35)}
+body.light-mode #about-panel,body.light-mode #feedback-panel{background:#fff;border-color:#e2e8f0}
+body.light-mode #about-close,body.light-mode #feedback-close{color:#94a3b8}
+body.light-mode #about-close:hover,body.light-mode #feedback-close:hover{color:#374151}
+body.light-mode .a-title,body.light-mode .f-title{color:#0f172a}
+body.light-mode .a-section-title{color:#2563eb}
+body.light-mode .a-body{color:#374151}
+body.light-mode .a-body a{color:#2563eb}
+body.light-mode .a-footer{color:#94a3b8;border-color:#e2e8f0}
+body.light-mode .f-label{color:#64748b}
+body.light-mode .f-select,body.light-mode .f-input,body.light-mode .f-textarea{background:#f8fafc;border-color:#e2e8f0;color:#0f172a}
+body.light-mode .f-submit{background:#2563eb}
+body.light-mode .f-submit:hover{background:#1d4ed8}
+body.light-mode .link{stroke:#d1d5db}
+body.light-mode .link.highlighted{stroke:#2563eb}
+body.light-mode .node-dir circle{fill:#64748b}
+body.light-mode .dir-label{fill:#374151}
+body.light-mode .co-label{fill:#374151}
+body.light-mode .node.dimmed circle{opacity:0.12}
+body.light-mode .node.dimmed text{opacity:0.1}
+body.light-mode .node.sector-dimmed circle{opacity:0.08}
 </style>
 </head>
 <body>
@@ -122,6 +184,7 @@ svg#graph{width:100%;height:100%}
   </div>
   <div id="topbar-right">
     <span id="refresh-label">Loading…</span>
+    <button id="theme-btn" title="Toggle light/dark mode">☀</button>
     <button id="about-btn">About</button>
     <button id="feedback-btn">Feedback</button>
   </div>
@@ -287,6 +350,19 @@ function shortName(name) {
     .replace(' Co-operative Group', '').replace(' International', ' Intl');
 }
 
+// Theme toggle (runs immediately so there's no flash of wrong theme)
+(function() {
+  const saved = localStorage.getItem('boardmap-theme') || 'dark';
+  if(saved === 'light') document.body.classList.add('light-mode');
+  const btn = document.getElementById('theme-btn');
+  btn.textContent = saved === 'light' ? '☾' : '☀';
+  btn.addEventListener('click', () => {
+    const isLight = document.body.classList.toggle('light-mode');
+    btn.textContent = isLight ? '☾' : '☀';
+    localStorage.setItem('boardmap-theme', isLight ? 'light' : 'dark');
+  });
+})();
+
 fetch('graph.json')
   .then(r => r.json())
   .then(data => {
@@ -355,6 +431,10 @@ fetch('graph.json')
 
     const zoom = d3.zoom().scaleExtent([0.3, 5]).on('zoom', e => {
       container.attr('transform', e.transform);
+      const k = e.transform.k;
+      container.selectAll('.co-label')
+        .attr('font-size', (10 / k) + 'px')
+        .attr('opacity', k < 0.45 ? 0 : k > 0.65 ? 1 : (k - 0.45) / 0.2);
     });
     svg.call(zoom);
 
@@ -416,6 +496,14 @@ fetch('graph.json')
         .attr('text-anchor','middle')
         .attr('pointer-events','none')
         .attr('y', d => getR(d) + 2);
+
+      nodeSel.filter(d => d.type==='company')
+        .append('text')
+        .attr('class','co-label')
+        .text(d => d.displayName || d.name)
+        .attr('font-size','10px')
+        .attr('text-anchor','middle')
+        .attr('y', d => getR(d) + 13);
 
       svg.on('click', () => { deselectAll(); closePanel(); });
 
